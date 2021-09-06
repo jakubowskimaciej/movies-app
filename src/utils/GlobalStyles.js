@@ -21,14 +21,8 @@ export default createGlobalStyle`
       box-sizing: border-box;
       --color-white: ${({ theme }) => theme.colors.white};
       --color-lightGrey: ${({ theme }) => theme.colors.lightGrey};
-      --color-grey: ${({ theme }) => theme.colors.grey};
       --color-darkGrey: ${({ theme }) => theme.colors.darkGrey};
       --color-black: ${({ theme }) => theme.colors.black};
-      --color-success: ${({ theme }) => theme.colors.success};
-      --color-error: ${({ theme }) => theme.colors.error};
-      --color-warning: ${({ theme }) => theme.colors.warning};
-      --color-lightPurple: ${({ theme }) => theme.colors.lightPurple};
-      --color-darkPurple: ${({ theme }) => theme.colors.darkPurple};
       --shadow: ${({ theme }) => theme.colors.shadow};
       
       @media ${(props) => props.theme.mediaQueries.largest} {
