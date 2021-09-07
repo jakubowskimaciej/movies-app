@@ -5,4 +5,5 @@ export const Wrapper = styled.main`
   height: 100vh;
   display: grid;
   grid-template-columns: 25rem 1fr;
+  position: relative;
 `;
