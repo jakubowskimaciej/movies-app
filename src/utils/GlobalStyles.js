@@ -21,6 +21,7 @@ export default createGlobalStyle`
       box-sizing: border-box;
       --color-white: ${({ theme }) => theme.colors.white};
       --color-lightGrey: ${({ theme }) => theme.colors.lightGrey};
+      --color-grey: ${({ theme }) => theme.colors.grey};
       --color-darkGrey: ${({ theme }) => theme.colors.darkGrey};
       --color-black: ${({ theme }) => theme.colors.black};
       --shadow: ${({ theme }) => theme.colors.shadow};

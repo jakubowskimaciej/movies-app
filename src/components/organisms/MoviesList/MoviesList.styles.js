@@ -6,5 +6,5 @@ export const Wrapper = styled.section`
   place-content: space-between space-evenly;
   align-items: start;
   padding: 4rem 0;
-  gap: 4rem 2rem;
+  gap: 3rem 2rem;
 `;
