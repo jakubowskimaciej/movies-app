@@ -28,7 +28,7 @@ const Root = () => {
         <MainTemplate>
           <Switch>
             <Route exact path="/">
-              <Redirect to="/discover/now_playing" />
+              <Redirect to="/discover/popular" />
             </Route>
             <Route path="/discover/:name">
               <NowPlaying />

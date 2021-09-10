@@ -4,6 +4,7 @@ import { fetchMovies } from 'actions';
 import { useParams } from 'react-router';
 
 import MoviesList from 'components/organisms/MoviesList/MoviesList';
+import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
 
 const NowPlaying = () => {
   const movies = useSelector((state) => state.movies);
@@ -16,6 +17,7 @@ const NowPlaying = () => {
 
   return (
     <section>
+      <InfoWrapper name={name} />
       <MoviesList movies={movies} />
     </section>
   );

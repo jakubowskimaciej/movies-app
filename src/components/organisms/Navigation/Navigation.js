@@ -14,7 +14,7 @@ const Navigation = () => {
 
   return (
     <Wrapper>
-      <LogoWrapper to="/discover/now_playing">
+      <LogoWrapper to="/discover/popular">
         <MoviesLogo />
       </LogoWrapper>
       <StyledNavWrapper>

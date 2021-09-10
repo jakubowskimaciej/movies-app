@@ -1,7 +1,7 @@
-import { Title } from 'components/atoms/Title/Title';
 import styled from 'styled-components';
+import { Title } from 'components/atoms/Title/Title';
 
-export const InfoWrapper = styled.div`
+export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
