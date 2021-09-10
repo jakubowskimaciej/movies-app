@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useMovies } from 'hooks/useMovies';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchMovies } from 'actions';
+import { useParams } from 'react-router';
+
 import MoviesList from 'components/organisms/MoviesList/MoviesList';
 
 const NowPlaying = () => {
-  const [movies, setMovies] = useState([]);
-  const { getMovies } = useMovies();
+  const movies = useSelector((state) => state.movies);
+  const dispatch = useDispatch();
+  const { name } = useParams();
 
   useEffect(() => {
-    (async () => {
-      const movies = await getMovies();
-      setMovies(movies);
-    })();
-  }, [getMovies]);
+    dispatch(fetchMovies(name));
+  }, [dispatch, name]);
 
   return (
-    <div>
+    <section>
       <MoviesList movies={movies} />
-    </div>
+    </section>
   );
 };
 

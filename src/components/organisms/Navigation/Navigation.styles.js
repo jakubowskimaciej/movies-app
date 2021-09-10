@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.nav`
   height: 100%;
   border-right: 0.1rem solid var(--color-lightGrey);
 `;
 
-export const LogoWrapper = styled.a`
+export const LogoWrapper = styled(Link)`
   width: 100%;
   height: 20rem;
   margin-top: 6rem;
