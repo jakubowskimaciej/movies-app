@@ -4,8 +4,7 @@ import { fetchMoviesByGenre } from 'actions';
 import { useParams } from 'react-router';
 
 import MoviesList from 'components/organisms/MoviesList/MoviesList';
-import { Title } from 'components/atoms/Title/Title';
-import { InfoWrapper } from './Genre.styles';
+import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
 
 const Genre = () => {
   const movies = useSelector((state) => state.movies);
@@ -19,10 +18,7 @@ const Genre = () => {
 
   return (
     <section>
-      <InfoWrapper>
-        <Title as="h2">{name}</Title>
-        <p>movies</p>
-      </InfoWrapper>
+      <InfoWrapper name={name} />
       <MoviesList movies={movies} />
     </section>
   );
