@@ -1,3 +1,4 @@
+import { Title } from 'components/atoms/Title/Title';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -54,11 +55,7 @@ export const InfoWrapper = styled.div`
   text-align: center;
 `;
 
-export const StyledTitle = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.m};
-  font-weight: 500;
-  color: var(--color-grey);
-
+export const StyledTitle = styled(Title)`
   ${Wrapper}:hover & {
     color: var(--color-white);
   }

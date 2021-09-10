@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { useMovies } from 'hooks/useMovies';
-import MoviesList from 'components/organisms/MoviesList/MoviesList';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchMoviesByGenre } from 'actions';
 import { useParams } from 'react-router';
 
+import MoviesList from 'components/organisms/MoviesList/MoviesList';
+import { Title } from 'components/atoms/Title/Title';
+import { InfoWrapper } from './Genre.styles';
+
 const Genre = () => {
+  const movies = useSelector((state) => state.movies);
+  const genres = useSelector((state) => state.genres);
+  const dispatch = useDispatch();
   const { name } = useParams();
-  const { getGenres, getMovies } = useMovies();
-  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    getGenres();
-  }, [getGenres]);
-
-  useEffect(() => {
-    (async () => {
-      setMovies(await getMovies(name));
-    })();
-  }, [getMovies, name]);
+    dispatch(fetchMoviesByGenre(name, genres));
+  }, [dispatch, name, genres]);
 
   return (
-    <div>
+    <section>
+      <InfoWrapper>
+        <Title as="h2">{name}</Title>
+        <p>movies</p>
+      </InfoWrapper>
       <MoviesList movies={movies} />
-    </div>
+    </section>
   );
 };
 

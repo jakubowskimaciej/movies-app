@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ReactComponent as MoviesLogo } from 'assets/movies-logo.svg';
 import {
   Wrapper,
@@ -6,20 +6,15 @@ import {
   StyledNavWrapper,
   StyledNavItem,
 } from './Navigation.styles';
-import { useMovies } from 'hooks/useMovies';
+
+import { useSelector } from 'react-redux';
 
 const Navigation = () => {
-  const { getGenres, genres } = useMovies();
-
-  useEffect(() => {
-    (async () => {
-      await getGenres();
-    })();
-  }, [getGenres]);
+  const genres = useSelector((state) => state.genres);
 
   return (
     <Wrapper>
-      <LogoWrapper href="/">
+      <LogoWrapper to="/discover/now_playing">
         <MoviesLogo />
       </LogoWrapper>
       <StyledNavWrapper>
