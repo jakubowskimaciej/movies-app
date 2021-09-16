@@ -11,6 +11,8 @@ import { init } from 'actions';
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import NowPlaying from './NowPlaying';
 import Genre from './Genre';
+import MovieDetails from './MovieDetails';
+import Person from './Person';
 
 const Root = () => {
   const dispatch = useDispatch();
@@ -35,6 +37,12 @@ const Root = () => {
             </Route>
             <Route path="/genre/:name">
               <Genre />
+            </Route>
+            <Route path="/movie/:id">
+              <MovieDetails />
+            </Route>
+            <Route path="/person/:id">
+              <Person />
             </Route>
           </Switch>
         </MainTemplate>

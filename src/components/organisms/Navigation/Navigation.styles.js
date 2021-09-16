@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.nav`
   height: 100%;
@@ -30,28 +30,4 @@ export const StyledNavWrapper = styled.div`
   padding: 2rem 3rem;
   position: sticky;
   top: 5%;
-`;
-
-export const StyledNavItem = styled(NavLink).attrs({
-  activeClassName: 'active-link',
-})`
-  width: 100%;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem 0;
-  font-size: ${({ theme }) => theme.fontSize.s};
-  font-weight: 700;
-  color: var(--color-grey);
-  text-decoration: none;
-  border: 0.1rem solid transparent;
-  border-radius: 5rem;
-  transition: all 200ms ease;
-
-  &:hover {
-    border: 0.1rem solid var(--color-lightGrey);
-  }
-
-  &.active-link {
-    border: 0.1rem solid var(--color-grey);
-    font-size: ${({ theme }) => theme.fontSize.m};
-  }
 `;

@@ -1,17 +1,23 @@
-import { Title } from 'components/atoms/Title/Title';
 import styled from 'styled-components';
+import { Title } from 'components/atoms/Title/Title';
+import { Link } from 'react-router-dom';
+import Rating from '../Rating/Rating';
+import { StyledImage } from 'components/atoms/StyledImage/StyledImage';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   background-color: transparent;
-  transition: all 300ms cubic-bezier(0.3, 0.43, 0.96, 0.64);
+  transition: transform 300ms cubic-bezier(0.3, 0.43, 0.96, 0.64);
+  text-decoration: none;
+  color: var(--color-darkGrey);
 
   &:hover {
     transform: scale(1.03);
+    color: var(--color-white);
 
     &:after {
       opacity: 1;
@@ -37,11 +43,8 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const StyledImage = styled.img`
+export const Image = styled(StyledImage)`
   height: 38rem;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 1.6rem;
   box-shadow: 0 1rem 0.9rem -0.5rem rgb(115 124 142);
 
   ${Wrapper}:hover & {
@@ -61,12 +64,8 @@ export const StyledTitle = styled(Title)`
   }
 `;
 
-export const StyledRating = styled.p`
-  color: var(--color-grey);
+export const StyledRating = styled(Rating)`
+  color: var(--color-lightGrey);
   font-weight: 500;
   font-size: ${({ theme }) => theme.fontSize.m};
-
-  ${Wrapper}:hover & {
-    color: var(--color-white);
-  }
 `;

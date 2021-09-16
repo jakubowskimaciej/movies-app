@@ -1,11 +1,7 @@
 import React from 'react';
 import { ReactComponent as MoviesLogo } from 'assets/movies-logo.svg';
-import {
-  Wrapper,
-  LogoWrapper,
-  StyledNavWrapper,
-  StyledNavItem,
-} from './Navigation.styles';
+import { Wrapper, LogoWrapper, StyledNavWrapper } from './Navigation.styles';
+import GenreButton from 'components/atoms/GenreButton/GenreButton';
 
 import { useSelector } from 'react-redux';
 
@@ -19,9 +15,9 @@ const Navigation = () => {
       </LogoWrapper>
       <StyledNavWrapper>
         {genres.map(({ id, name }) => (
-          <StyledNavItem key={id} to={`/genre/${name}`}>
+          <GenreButton key={id} to={`/genre/${name}`}>
             {name}
-          </StyledNavItem>
+          </GenreButton>
         ))}
       </StyledNavWrapper>
     </Wrapper>
