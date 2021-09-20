@@ -21,7 +21,7 @@ const Cast = () => {
   }, [id]);
 
   const posterLink = `https://image.tmdb.org/t/p/`;
-  console.log(cast);
+
   return (
     <CastWrapper>
       {cast.map((person) => (

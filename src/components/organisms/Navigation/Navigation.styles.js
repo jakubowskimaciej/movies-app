@@ -4,20 +4,21 @@ import { Link } from 'react-router-dom';
 export const Wrapper = styled.nav`
   height: 100%;
   border-right: 0.1rem solid var(--color-lightGrey);
+  margin-top: 4rem;
 `;
 
 export const LogoWrapper = styled(Link)`
   width: 100%;
   height: 20rem;
-  margin-top: 6rem;
+  ${'' /* margin-top: 2rem; */}
   padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
 
   svg {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
   }
 `;
 

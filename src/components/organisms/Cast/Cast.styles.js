@@ -18,6 +18,11 @@ export const ActorWrapper = styled(Link)`
   margin: 2rem 0;
   text-decoration: none;
 
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-grey);
+  }
+
   ${StyledImage} {
     width: 7rem;
     height: 7rem;
