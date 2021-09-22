@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchMovies } from 'actions';
 import { useParams } from 'react-router';
 
-import MoviesList from 'components/organisms/MoviesList/MoviesList';
+import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
 
 const NowPlaying = () => {

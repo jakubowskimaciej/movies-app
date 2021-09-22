@@ -48,3 +48,46 @@ export const fetchMoviesByGenre = (name, genres) => async (dispatch) => {
     console.log(err);
   }
 };
+
+//fetch movie details
+export const fetchMovieDetails = (id) => async (dispatch) => {
+  try {
+    const { data } = await tmdb.get(`/movie/${id}`);
+    dispatch({
+      type: 'GET_MOVIE_DETAILS',
+      payload: data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//fetch movie videos
+export const fetchMovieVideos = (id) => async (dispatch) => {
+  try {
+    const { data } = await tmdb.get(`/movie/${id}/videos`);
+    dispatch({
+      type: 'GET_MOVIE_VIDEOS',
+      payload: data.results,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//fetch movies where person appears
+export const fetchMoviesByPerson = (id) => async (dispatch) => {
+  try {
+    const { data } = await tmdb.get(`/discover/movie`, {
+      params: {
+        with_cast: id,
+      },
+    });
+    dispatch({
+      type: 'GET_PERSON_MOVIES',
+      payload: data.results,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
