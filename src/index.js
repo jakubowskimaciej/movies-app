@@ -8,15 +8,16 @@ import { ThemeProvider } from 'styled-components';
 import theme from 'utils/theme';
 import GlobalStyles from 'utils/GlobalStyles';
 import 'utils/fonts.css';
+import '../node_modules/react-modal-video/scss/modal-video.scss';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Root />
       </ThemeProvider>
     </Provider>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );

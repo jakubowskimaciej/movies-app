@@ -14,6 +14,27 @@ import Genre from './Genre';
 import MovieDetails from './MovieDetails';
 import Person from './Person';
 
+import {
+  faDotCircle,
+  faLink,
+  faPlayCircle,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faWindowClose,
+  faTimesCircle,
+} from '@fortawesome/free-regular-svg-icons';
+import { faImdb } from '@fortawesome/free-brands-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(
+  faDotCircle,
+  faImdb,
+  faLink,
+  faPlayCircle,
+  faWindowClose,
+  faTimesCircle
+);
+
 const Root = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);

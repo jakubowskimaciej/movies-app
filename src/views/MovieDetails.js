@@ -1,35 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import tmdb from 'api/tmdb';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMovieDetails, fetchMovieVideos } from 'actions';
+
 import {
   MovieInfo,
   InfoWrapper,
   Wrapper,
   DetailWrapper,
   GenreWrapper,
-  StyledLink,
-  StyledInfoTitle,
+  StyledGenreLink,
   MovieTitle,
   MovieTagLine,
+  ImageWrapper,
 } from './MovieDetails.styles';
+import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitle';
 import Rating from 'components/molecules/Rating/Rating';
 import { StyledImage } from 'components/atoms/StyledImage/StyledImage';
 import Cast from 'components/organisms/Cast/Cast';
+import { LinkWrapper } from 'components/molecules/LinkWrapper/LinkWrapper';
+import { AWrapper } from 'components/atoms/AWrapper/AWrapper';
+import { Button } from 'components/atoms/Button/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useModal from 'hooks/useModal/useModal';
+import ModalVideo from 'react-modal-video';
 
 const MovieDetails = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState({});
+  const movie = useSelector((state) => state.movieDetails);
+  const videos = useSelector((state) => state.movieVideos);
+  const dispatch = useDispatch();
+  const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
   useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await tmdb.get(`/movie/${id}`);
-        setMovie(data);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [id]);
+    dispatch(fetchMovieDetails(id));
+    dispatch(fetchMovieVideos(id));
+  }, [dispatch, id]);
 
   const renderInfo = (lang, time, data) => {
     const info = [];
@@ -53,20 +59,61 @@ const MovieDetails = () => {
   const renderGenres = (genre) => {
     if (!genre) return;
     return genre.map(({ name, id }) => (
-      <StyledLink to={`/genre/${name}`} key={id}>
+      <StyledGenreLink to={`/genre/${name}`} key={id}>
         {name}
-      </StyledLink>
+      </StyledGenreLink>
     ));
+  };
+
+  const renderTrailer = () => {
+    if (videos.length === 0) return;
+    const { key } = videos.find(
+      (video) => video.type === 'Trailer' && video.site === 'YouTube'
+    );
+
+    return (
+      <>
+        <Button isSecondary onClick={handleOpenModal}>
+          Trailer
+          <FontAwesomeIcon
+            icon={['fas', 'play-circle']}
+            style={{ marginLeft: '1rem' }}
+          />
+        </Button>
+        {isModalOpen ? (
+          <ModalVideo
+            channel="youtube"
+            isOpen={isModalOpen}
+            videoId={key}
+            onClose={handleCloseModal}
+          />
+        ) : null}
+      </>
+    );
   };
 
   const posterLink = `https://image.tmdb.org/t/p/`;
 
   return (
     <Wrapper>
-      <StyledImage
-        src={posterLink + 'w780' + movie.poster_path}
-        alt={movie.title}
-      />
+      <ImageWrapper>
+        <StyledImage
+          src={posterLink + 'w780' + movie.poster_path}
+          alt={movie.title}
+        />
+        <LinkWrapper>
+          <AWrapper href={movie.homepage} target="blank">
+            <Button>
+              Homepage
+              <FontAwesomeIcon
+                icon={['fas', 'link']}
+                style={{ marginLeft: '1rem' }}
+              />
+            </Button>
+          </AWrapper>
+          <AWrapper>{renderTrailer()}</AWrapper>
+        </LinkWrapper>
+      </ImageWrapper>
       <MovieInfo>
         <MovieTitle>{movie.title}</MovieTitle>
         <MovieTagLine>{movie.tagline}</MovieTagLine>

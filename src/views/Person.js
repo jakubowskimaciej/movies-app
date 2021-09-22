@@ -1,22 +1,102 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+import tmdb from 'api/tmdb';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMoviesByPerson } from 'actions';
 
-const Wrapper = styled.section`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+import { StyledImage } from 'components/atoms/StyledImage/StyledImage';
+import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitle';
+import { Button } from 'components/atoms/Button/Button';
 
-  h1 {
-    font-size: ${({ theme }) => theme.fontSize.xxxl};
-  }
-`;
+import {
+  BioWrapper,
+  StyledName,
+  DetailsWrapper,
+  StyledBirthday,
+  StyledBio,
+  MoviesWrapper,
+  Wrapper,
+} from './Person.styles';
+import MoviesList from 'components/molecules/MoviesList/MoviesList';
+import { LinkWrapper } from 'components/molecules/LinkWrapper/LinkWrapper';
+import { AWrapper } from 'components/atoms/AWrapper/AWrapper';
 
 const Person = () => {
+  const { id } = useParams();
+  const [info, setInfo] = useState([]);
+  const movies = useSelector((state) => state.personMovies);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await tmdb.get(`/person/${id}`);
+        setInfo(data);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [id]);
+
+  useEffect(() => {
+    dispatch(fetchMoviesByPerson(id));
+  }, [dispatch, id]);
+
+  const posterLink = `https://image.tmdb.org/t/p/`;
+
+  const renderWebsite = (link) => {
+    if (!link) return;
+    return (
+      <AWrapper href={link} target="blank">
+        <Button>
+          Website
+          <FontAwesomeIcon
+            icon={['fas', 'link']}
+            style={{ marginLeft: '1rem' }}
+          />
+        </Button>
+      </AWrapper>
+    );
+  };
+
+  const renderImdb = (id) => {
+    if (!id) return;
+    return (
+      <AWrapper href={`https://www.imdb.com/name/${id}`} target="blank">
+        <Button>
+          IMDB
+          <FontAwesomeIcon
+            icon={['fab', 'imdb']}
+            style={{ marginLeft: '1rem' }}
+          />
+        </Button>
+      </AWrapper>
+    );
+  };
+
   return (
     <Wrapper>
-      <h1>Person view</h1>
+      <BioWrapper>
+        <StyledImage
+          src={posterLink + 'w780' + info.profile_path}
+          alt={info.name}
+        />
+        <DetailsWrapper>
+          <StyledName as="h2">{info.name}</StyledName>
+          <StyledBirthday>{info.birthday}</StyledBirthday>
+          <StyledInfoTitle as="h3">The Biography</StyledInfoTitle>
+          <StyledBio>{info.biography}</StyledBio>
+          <LinkWrapper>
+            {renderWebsite(info.homepage)}
+            {renderImdb(info.imdb_id)}
+          </LinkWrapper>
+        </DetailsWrapper>
+      </BioWrapper>
+      <MoviesWrapper>
+        <h2>Also appears in:</h2>
+        <MoviesList movies={movies} />
+      </MoviesWrapper>
     </Wrapper>
   );
 };

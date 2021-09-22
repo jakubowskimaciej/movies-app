@@ -1,6 +1,9 @@
 const initialState = {
   genres: [],
   movies: [],
+  movieDetails: [],
+  movieVideos: [],
+  personMovies: [],
   loading: true,
 };
 
@@ -20,6 +23,21 @@ export const moviesReducer = (state = initialState, action) => {
       return {
         ...state,
         movies: action.payload,
+      };
+    case 'GET_MOVIE_DETAILS':
+      return {
+        ...state,
+        movieDetails: action.payload,
+      };
+    case 'GET_MOVIE_VIDEOS':
+      return {
+        ...state,
+        movieVideos: action.payload,
+      };
+    case 'GET_PERSON_MOVIES':
+      return {
+        ...state,
+        personMovies: action.payload,
       };
     default:
       return state;

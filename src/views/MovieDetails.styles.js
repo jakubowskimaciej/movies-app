@@ -1,13 +1,19 @@
 import GenreButton from 'components/atoms/GenreButton/GenreButton';
-import { Title } from 'components/atoms/Title/Title';
 import styled from 'styled-components';
 
 export const Wrapper = styled.section`
   width: 100%;
   height: 100%;
+  display: grid;
+  grid-template-columns: 0.65fr 1fr;
+  padding: 4rem;
+`;
+
+export const ImageWrapper = styled.div`
+  width: 90%;
+  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
   padding: 4rem;
 `;
 
@@ -65,21 +71,13 @@ export const InfoWrapper = styled.div`
   }
 `;
 
-export const StyledInfoTitle = styled(Title)`
-  font-size: ${({ theme }) => theme.fontSize.m};
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  color: var(--color-darkGrey);
-`;
-
 export const GenreWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
 `;
 
-export const StyledLink = styled(GenreButton)`
+export const StyledGenreLink = styled(GenreButton)`
   margin-right: 1rem;
   font-size: ${({ theme }) => theme.fontSize.m};
   text-decoration: none;
