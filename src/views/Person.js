@@ -19,7 +19,7 @@ import {
   Wrapper,
 } from './Person.styles';
 import MoviesList from 'components/molecules/MoviesList/MoviesList';
-import { LinkWrapper } from 'components/molecules/LinkWrapper/LinkWrapper';
+import { LinkWrapper } from 'components/atoms/LinkWrapper/LinkWrapper';
 import { AWrapper } from 'components/atoms/AWrapper/AWrapper';
 
 const Person = () => {

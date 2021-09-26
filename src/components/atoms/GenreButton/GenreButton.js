@@ -10,13 +10,14 @@ const StyledButton = styled(NavLink).attrs({
   align-items: center;
   width: 100%;
   padding: ${({ isBig }) => (isBig ? '1rem 2.4rem' : '0.5rem 1rem')};
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
   font-size: ${({ theme, isBig }) =>
     isBig ? theme.fontSize.m : theme.fontSize.s};
   font-weight: 700;
   color: var(--color-grey);
-  background-color: var(--color-white);
+  background-color: transparent;
   text-decoration: none;
+  text-transform: capitalize;
   border: ${({ isBig }) =>
     isBig ? '0.1rem solid var(--color-darkGrey)' : '0.1rem solid transparent'};
   border-radius: 5rem;

@@ -1,9 +1,13 @@
 const initialState = {
+  staticCategories: ['popular', 'upcoming'],
   genres: [],
   movies: [],
   movieDetails: [],
   movieVideos: [],
   personMovies: [],
+  watchlist: localStorage.getItem('watchlist')
+    ? JSON.parse(localStorage.getItem('watchlist'))
+    : [],
   loading: true,
 };
 
@@ -38,6 +42,18 @@ export const moviesReducer = (state = initialState, action) => {
       return {
         ...state,
         personMovies: action.payload,
+      };
+    case 'ADD_TO_WATCHLIST':
+      return {
+        ...state,
+        watchlist: [action.payload, ...state.watchlist],
+      };
+    case 'REMOVE_FROM_WATCHLIST':
+      return {
+        ...state,
+        watchlist: state.watchlist.filter(
+          (movie) => movie.id !== action.payload
+        ),
       };
     default:
       return state;
