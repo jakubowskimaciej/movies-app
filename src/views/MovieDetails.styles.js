@@ -1,5 +1,6 @@
 import GenreButton from 'components/atoms/GenreButton/GenreButton';
 import styled from 'styled-components';
+import { Button } from 'components/atoms/Button/Button';
 
 export const Wrapper = styled.section`
   width: 100%;
@@ -7,6 +8,7 @@ export const Wrapper = styled.section`
   display: grid;
   grid-template-columns: 0.65fr 1fr;
   padding: 4rem;
+  position: relative;
 `;
 
 export const ImageWrapper = styled.div`
@@ -14,6 +16,8 @@ export const ImageWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   padding: 4rem;
 `;
 
@@ -89,5 +93,28 @@ export const StyledGenreLink = styled(GenreButton)`
     border: 0.1rem solid var(--color-grey);
     color: var(--color-grey);
     transform: translateY(-0.3rem);
+  }
+`;
+
+export const ActiveButton = styled(Button)`
+  width: 90%;
+  max-width: 42rem;
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  font-size: ${({ theme }) => theme.fontSize.l};
+  border: 0.1rem solid
+    ${({ isSecondary }) =>
+      isSecondary ? 'var(--color-darkGrey)' : 'var(--color-success)'};
+  background-color: ${({ isSecondary }) =>
+    isSecondary ? 'var(--color-darkGrey)' : 'var(--color-success)'};
+  color: var(--color-white);
+
+  &:active {
+    transform: translateY(0.5rem);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 `;

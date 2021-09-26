@@ -21,6 +21,8 @@ export default createGlobalStyle`
       font-size: 62.50%; //1rem = 10px
       box-sizing: border-box;
       --color-white: ${({ theme }) => theme.colors.white};
+      --color-success: ${({ theme }) => theme.colors.success};
+      --color-danger: ${({ theme }) => theme.colors.danger};
       --color-lightGrey: ${({ theme }) => theme.colors.lightGrey};
       --color-grey: ${({ theme }) => theme.colors.grey};
       --color-darkGrey: ${({ theme }) => theme.colors.darkGrey};
@@ -46,5 +48,6 @@ export default createGlobalStyle`
     select,
     a {
       -webkit-tap-highlight-color: rgba(0,0,0,0);
+      font-family: inherit;
     }
 `;

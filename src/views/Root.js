@@ -9,19 +9,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { init } from 'actions';
 
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
-import NowPlaying from './NowPlaying';
+import Discover from './Discover';
 import Genre from './Genre';
 import MovieDetails from './MovieDetails';
 import Person from './Person';
+import Watchlist from './Watchlist';
 
 import {
   faDotCircle,
   faLink,
   faPlayCircle,
+  faPlusCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faWindowClose,
   faTimesCircle,
+  faTrashAlt,
 } from '@fortawesome/free-regular-svg-icons';
 import { faImdb } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -32,7 +35,9 @@ library.add(
   faLink,
   faPlayCircle,
   faWindowClose,
-  faTimesCircle
+  faTimesCircle,
+  faPlusCircle,
+  faTrashAlt
 );
 
 const Root = () => {
@@ -54,7 +59,7 @@ const Root = () => {
               <Redirect to="/discover/popular" />
             </Route>
             <Route path="/discover/:name">
-              <NowPlaying />
+              <Discover />
             </Route>
             <Route path="/genre/:name">
               <Genre />
@@ -64,6 +69,9 @@ const Root = () => {
             </Route>
             <Route path="/person/:id">
               <Person />
+            </Route>
+            <Route path="/watchlist">
+              <Watchlist />
             </Route>
           </Switch>
         </MainTemplate>

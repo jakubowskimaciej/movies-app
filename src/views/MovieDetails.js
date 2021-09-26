@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovieDetails, fetchMovieVideos } from 'actions';
-
 import {
   MovieInfo,
   InfoWrapper,
@@ -13,12 +12,13 @@ import {
   MovieTitle,
   MovieTagLine,
   ImageWrapper,
+  ActiveButton,
 } from './MovieDetails.styles';
 import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitle';
 import Rating from 'components/molecules/Rating/Rating';
 import { StyledImage } from 'components/atoms/StyledImage/StyledImage';
 import Cast from 'components/organisms/Cast/Cast';
-import { LinkWrapper } from 'components/molecules/LinkWrapper/LinkWrapper';
+import { LinkWrapper } from 'components/atoms/LinkWrapper/LinkWrapper';
 import { AWrapper } from 'components/atoms/AWrapper/AWrapper';
 import { Button } from 'components/atoms/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -29,6 +29,7 @@ const MovieDetails = () => {
   const { id } = useParams();
   const movie = useSelector((state) => state.movieDetails);
   const videos = useSelector((state) => state.movieVideos);
+  const watchlist = useSelector((state) => state.watchlist);
   const dispatch = useDispatch();
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
@@ -94,6 +95,16 @@ const MovieDetails = () => {
 
   const posterLink = `https://image.tmdb.org/t/p/`;
 
+  const handleAddToWatchlist = () => {
+    dispatch({
+      type: 'ADD_TO_WATCHLIST',
+      payload: movie,
+    });
+  };
+
+  let storedMovie = watchlist.find((item) => item.id === movie.id);
+  const watchlistDisabled = storedMovie ? true : false;
+
   return (
     <Wrapper>
       <ImageWrapper>
@@ -112,6 +123,16 @@ const MovieDetails = () => {
             </Button>
           </AWrapper>
           <AWrapper>{renderTrailer()}</AWrapper>
+          <ActiveButton
+            onClick={() => handleAddToWatchlist()}
+            disabled={watchlistDisabled}
+          >
+            Add to Watchlist
+            <FontAwesomeIcon
+              icon={['fas', 'plus-circle']}
+              style={{ marginLeft: '1rem' }}
+            />
+          </ActiveButton>
         </LinkWrapper>
       </ImageWrapper>
       <MovieInfo>

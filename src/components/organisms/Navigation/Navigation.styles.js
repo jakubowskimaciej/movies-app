@@ -27,7 +27,7 @@ export const StyledNavWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 2rem 3rem;
   position: sticky;
   top: 5%;
