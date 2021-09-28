@@ -4,16 +4,16 @@ import { Title } from 'components/atoms/Title/Title';
 export const Wrapper = styled.section`
   width: 100%;
   height: 100%;
-  overflow: scroll;
 `;
 
 export const BioWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
+  width: 80vw;
+  height: 75vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 4rem;
+  align-items: flex-start;
+  margin: 5rem auto;
+  padding: 2rem 4rem;
 `;
 
 export const StyledName = styled(Title)`
@@ -28,7 +28,7 @@ export const DetailsWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 8rem;
 `;
 
@@ -44,14 +44,9 @@ export const StyledBio = styled.p`
   font-size: ${({ theme }) => theme.fontSize.m};
 `;
 
-export const MoviesWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-
-  h2 {
-    margin-left: 4rem;
-    font-size: ${({ theme }) => theme.fontSize.xl};
-    font-weight: 300;
-    color: var(--color-grey);
-  }
+export const StyledH2 = styled.h2`
+  margin-left: 4rem;
+  font-size: ${({ theme }) => theme.fontSize.xl};
+  font-weight: 300;
+  color: var(--color-grey);
 `;

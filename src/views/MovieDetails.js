@@ -24,6 +24,7 @@ import { Button } from 'components/atoms/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useModal from 'hooks/useModal/useModal';
 import ModalVideo from 'react-modal-video';
+import { posterLink } from './Root';
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -92,8 +93,6 @@ const MovieDetails = () => {
       </>
     );
   };
-
-  const posterLink = `https://image.tmdb.org/t/p/`;
 
   const handleAddToWatchlist = () => {
     dispatch({

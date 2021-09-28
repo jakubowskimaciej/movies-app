@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import PersonPic from 'assets/PersonPic.svg';
 import { CastWrapper, ActorWrapper } from './Cast.styles';
 import { StyledImage } from 'components/atoms/StyledImage/StyledImage';
+import { posterLink } from 'views/Root';
 
 const Cast = () => {
   const { id } = useParams();
@@ -19,8 +20,6 @@ const Cast = () => {
       }
     })();
   }, [id]);
-
-  const posterLink = `https://image.tmdb.org/t/p/`;
 
   return (
     <CastWrapper>

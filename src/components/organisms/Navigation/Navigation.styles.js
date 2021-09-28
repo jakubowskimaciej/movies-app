@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 export const Wrapper = styled.nav`
   height: 100%;
   border-right: 0.1rem solid var(--color-lightGrey);
-  margin-top: 4rem;
+  grid-row: 1/3;
+  grid-column: 1/2;
 `;
 
 export const LogoWrapper = styled(Link)`
   width: 100%;
   height: 20rem;
-  ${'' /* margin-top: 2rem; */}
   padding: 2rem;
   display: flex;
   justify-content: center;
@@ -29,6 +29,4 @@ export const StyledNavWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 2rem 3rem;
-  position: sticky;
-  top: 5%;
 `;

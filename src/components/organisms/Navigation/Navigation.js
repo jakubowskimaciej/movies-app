@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactComponent as MoviesLogo } from 'assets/movies-logo.svg';
 import { Wrapper, LogoWrapper, StyledNavWrapper } from './Navigation.styles';
 import GenreButton from 'components/atoms/GenreButton/GenreButton';
+import StickyBox from 'react-sticky-box';
 
 import { useSelector } from 'react-redux';
 import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitle';
@@ -12,24 +13,26 @@ const Navigation = () => {
 
   return (
     <Wrapper>
-      <LogoWrapper to="/discover/popular">
-        <MoviesLogo />
-      </LogoWrapper>
-      <StyledNavWrapper>
-        <StyledInfoTitle>discover</StyledInfoTitle>
-        {categories.map((item) => (
-          <GenreButton key={item} to={`/discover/${item}`}>
-            {item}
-          </GenreButton>
-        ))}
-        <GenreButton to={`/watchlist`}>watchlist</GenreButton>
-        <StyledInfoTitle>genres</StyledInfoTitle>
-        {genres.map(({ id, name }) => (
-          <GenreButton key={id} to={`/genre/${name}`}>
-            {name}
-          </GenreButton>
-        ))}
-      </StyledNavWrapper>
+      <StickyBox>
+        <LogoWrapper to="/discover/popular">
+          <MoviesLogo />
+        </LogoWrapper>
+        <StyledNavWrapper>
+          <StyledInfoTitle>discover</StyledInfoTitle>
+          {categories.map((item) => (
+            <GenreButton key={item} to={`/discover/${item}`}>
+              {item}
+            </GenreButton>
+          ))}
+          <GenreButton to={`/watchlist`}>watchlist</GenreButton>
+          <StyledInfoTitle>genres</StyledInfoTitle>
+          {genres.map(({ id, name }) => (
+            <GenreButton key={id} to={`/genre/${name}`}>
+              {name}
+            </GenreButton>
+          ))}
+        </StyledNavWrapper>
+      </StickyBox>
     </Wrapper>
   );
 };

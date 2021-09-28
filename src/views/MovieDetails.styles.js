@@ -1,6 +1,6 @@
-import GenreButton from 'components/atoms/GenreButton/GenreButton';
 import styled from 'styled-components';
 import { Button } from 'components/atoms/Button/Button';
+import GenreButton from 'components/atoms/GenreButton/GenreButton';
 
 export const Wrapper = styled.section`
   width: 100%;
