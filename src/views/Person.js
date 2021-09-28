@@ -15,12 +15,13 @@ import {
   DetailsWrapper,
   StyledBirthday,
   StyledBio,
-  MoviesWrapper,
+  StyledH2,
   Wrapper,
 } from './Person.styles';
 import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import { LinkWrapper } from 'components/atoms/LinkWrapper/LinkWrapper';
 import { AWrapper } from 'components/atoms/AWrapper/AWrapper';
+import { posterLink } from './Root';
 
 const Person = () => {
   const { id } = useParams();
@@ -42,8 +43,6 @@ const Person = () => {
   useEffect(() => {
     dispatch(fetchMoviesByPerson(id));
   }, [dispatch, id]);
-
-  const posterLink = `https://image.tmdb.org/t/p/`;
 
   const renderWebsite = (link) => {
     if (!link) return;
@@ -93,10 +92,10 @@ const Person = () => {
           </LinkWrapper>
         </DetailsWrapper>
       </BioWrapper>
-      <MoviesWrapper>
-        <h2>Also appears in:</h2>
-        <MoviesList movies={movies} />
-      </MoviesWrapper>
+      {/* <MoviesWrapper> */}
+      <StyledH2>Also appears in:</StyledH2>
+      <MoviesList movies={movies} />
+      {/* </MoviesWrapper> */}
     </Wrapper>
   );
 };

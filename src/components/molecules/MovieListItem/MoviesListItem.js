@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { posterLink } from 'views/Root';
 import {
   StyledLink,
   Image,
@@ -16,7 +17,6 @@ const MovieListItem = ({
   inWatchlist,
   movieData: { title, poster_path, vote_average, id },
 }) => {
-  const posterLink = 'https://image.tmdb.org/t/p/w342';
   const dispatch = useDispatch();
 
   //delete movie from watchlist
@@ -30,7 +30,7 @@ const MovieListItem = ({
   return (
     <Wrapper>
       <StyledLink to={`/movie/${id}`} onClick={onClick}>
-        <Image src={posterLink + poster_path} alt={title} />
+        <Image src={posterLink + 'w342' + poster_path} alt={title} />
         <InfoWrapper>
           <StyledTitle>{title}</StyledTitle>
           <StyledRating value={vote_average / 2} />

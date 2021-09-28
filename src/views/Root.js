@@ -40,6 +40,8 @@ library.add(
   faTrashAlt
 );
 
+export const posterLink = `https://image.tmdb.org/t/p/`;
+
 const Root = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);

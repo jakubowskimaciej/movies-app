@@ -1,34 +1,82 @@
-import React from 'react';
-import styled from 'styled-components';
-
-const StyledForm = styled.form`
-  position: absolute;
-  top: 5%;
-  right: 5%;
-`;
-
-const StyledInput = styled.input`
-  width: 18rem;
-  padding: 0.8rem 1.8rem;
-  border: 0.1rem solid var(--color-lightGrey);
-  border-radius: 5rem;
-  transition: all 200ms ease-in-out;
-  box-shadow: -2px 4px 10px rgba(115, 124, 142, 0.09);
-  color: var(--color-darkGrey);
-
-  &:active,
-  &:focus {
-    width: 32.5rem;
-    outline: none;
-    box-shadow: -2px 4px 10px rgba(115, 124, 142, 0.3);
-  }
-`;
+import React, { useState } from 'react';
+import { useCombobox } from 'downshift';
+import debounce from 'lodash.debounce';
+import { Input } from 'components/atoms/Input/Input';
+import {
+  SearchbarWrapper,
+  SearchResults,
+  SearchResultsItem,
+  SearchWrapper,
+  StyledLink,
+  StyledTitle,
+} from './Searchbar.styles';
+import { posterLink } from 'views/Root';
+import { useSearch } from 'hooks/useSearch/useSearch';
 
 const Searchbar = () => {
+  const [searchedMovies, setSearchedMovies] = useState([]);
+  const { searchMovies } = useSearch();
+
+  const getMatchingMovies = debounce(async ({ inputValue }) => {
+    if (inputValue === '') return '';
+    const { results } = await searchMovies(inputValue);
+    setSearchedMovies(results);
+  }, 500);
+
+  const {
+    isOpen,
+    getMenuProps,
+    getInputProps,
+    getComboboxProps,
+    highlightedIndex,
+    getItemProps,
+  } = useCombobox({
+    items: searchedMovies,
+    itemToString: (item) => (item ? item.title : ''),
+    onInputValueChange: getMatchingMovies,
+  });
+
   return (
-    <StyledForm>
-      <StyledInput type="text" placeholder="Search for a movie..." />
-    </StyledForm>
+    <SearchbarWrapper>
+      <SearchWrapper {...getComboboxProps()}>
+        <Input
+          {...getInputProps({})}
+          name="search"
+          id="search"
+          type="text"
+          placeholder="Search for a movie..."
+          autoComplete="off"
+        />
+        <SearchResults
+          isVisible={isOpen && searchedMovies.length > 0}
+          {...getMenuProps()}
+          aria-label="results"
+        >
+          {isOpen &&
+            searchedMovies.map((item, index) => (
+              <SearchResultsItem
+                {...getItemProps({ item, index })}
+                highlighted={highlightedIndex === index}
+                key={item.id}
+              >
+                <StyledLink to={`/movie/${item.id}`}>
+                  <img
+                    src={
+                      item.poster_path
+                        ? posterLink + 'w185' + item.poster_path
+                        : posterLink + 'w185' + item.profile_path
+                    }
+                    alt={item.title}
+                  />
+                  <StyledTitle highlighted={highlightedIndex === index}>
+                    {item.title ? item.title : item.name}
+                  </StyledTitle>
+                </StyledLink>
+              </SearchResultsItem>
+            ))}
+        </SearchResults>
+      </SearchWrapper>
+    </SearchbarWrapper>
   );
 };
 
