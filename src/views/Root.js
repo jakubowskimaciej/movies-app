@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { init } from 'actions';
 
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
-import Discover from './Discover';
-import Genre from './Genre';
-import MovieDetails from './MovieDetails';
-import Person from './Person';
-import Watchlist from './Watchlist';
+
+const Discover = lazy(() => import('./Discover'));
+const Genre = lazy(() => import('./Genre'));
+const MovieDetails = lazy(() => import('./MovieDetails'));
+const Person = lazy(() => import('./Person'));
+const Watchlist = lazy(() => import('./Watchlist'));
 
 import {
   faDotCircle,
@@ -28,6 +29,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { faImdb } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import Loader from 'components/atoms/Loader/Loader';
 
 library.add(
   faDotCircle,
@@ -44,7 +46,6 @@ export const posterLink = `https://image.tmdb.org/t/p/`;
 
 const Root = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
     dispatch(init());
@@ -52,11 +53,9 @@ const Root = () => {
 
   return (
     <Router>
-      {loading ? (
-        <h2>Loading</h2>
-      ) : (
-        <MainTemplate>
-          <Switch>
+      <MainTemplate>
+        <Switch>
+          <Suspense fallback={<Loader />}>
             <Route exact path="/">
               <Redirect to="/discover/popular" />
             </Route>
@@ -75,9 +74,9 @@ const Root = () => {
             <Route path="/watchlist">
               <Watchlist />
             </Route>
-          </Switch>
-        </MainTemplate>
-      )}
+          </Suspense>
+        </Switch>
+      </MainTemplate>
     </Router>
   );
 };

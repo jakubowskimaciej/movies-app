@@ -12,6 +12,7 @@ import {
 } from './Searchbar.styles';
 import { posterLink } from 'views/Root';
 import { useSearch } from 'hooks/useSearch/useSearch';
+import LazyLoad from 'react-lazyload';
 
 const Searchbar = () => {
   const [searchedMovies, setSearchedMovies] = useState([]);
@@ -59,19 +60,21 @@ const Searchbar = () => {
                 highlighted={highlightedIndex === index}
                 key={item.id}
               >
-                <StyledLink to={`/movie/${item.id}`}>
-                  <img
-                    src={
-                      item.poster_path
-                        ? posterLink + 'w185' + item.poster_path
-                        : posterLink + 'w185' + item.profile_path
-                    }
-                    alt={item.title}
-                  />
-                  <StyledTitle highlighted={highlightedIndex === index}>
-                    {item.title ? item.title : item.name}
-                  </StyledTitle>
-                </StyledLink>
+                <LazyLoad style={{ height: '100%', width: '100%' }}>
+                  <StyledLink to={`/movie/${item.id}`}>
+                    <img
+                      src={
+                        item.poster_path
+                          ? posterLink + 'w185' + item.poster_path
+                          : posterLink + 'w185' + item.profile_path
+                      }
+                      alt={item.title}
+                    />
+                    <StyledTitle highlighted={highlightedIndex === index}>
+                      {item.title ? item.title : item.name}
+                    </StyledTitle>
+                  </StyledLink>
+                </LazyLoad>
               </SearchResultsItem>
             ))}
         </SearchResults>

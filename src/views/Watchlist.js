@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import styled from 'styled-components';
 import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
+import { animateScroll as scroll } from 'react-scroll';
 
 const Wrapper = styled.section`
   width: 100%;
@@ -13,6 +14,10 @@ const Watchlist = () => {
   const watchlist = useSelector((state) => state.watchlist);
 
   useEffect(() => {
+    scroll.scrollToTop({
+      smooth: true,
+      delay: 500,
+    });
     localStorage.setItem('watchlist', JSON.stringify(watchlist));
   }, [watchlist]);
 

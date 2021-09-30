@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { posterLink } from 'views/Root';
@@ -11,6 +10,7 @@ import {
   StyledButton,
   Wrapper,
 } from './MovieListItem.styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const MovieListItem = ({
   onClick,

@@ -25,6 +25,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useModal from 'hooks/useModal/useModal';
 import ModalVideo from 'react-modal-video';
 import { posterLink } from './Root';
+import LazyLoad from 'react-lazyload';
+import { animateScroll as scroll } from 'react-scroll';
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -35,6 +37,10 @@ const MovieDetails = () => {
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
   useEffect(() => {
+    scroll.scrollToTop({
+      smooth: true,
+      delay: 500,
+    });
     dispatch(fetchMovieDetails(id));
     dispatch(fetchMovieVideos(id));
   }, [dispatch, id]);
@@ -68,7 +74,8 @@ const MovieDetails = () => {
   };
 
   const renderTrailer = () => {
-    if (videos.length === 0) return;
+    if (videos.length === 0) return null;
+    if (!videos.key) return;
     const { key } = videos.find(
       (video) => video.type === 'Trailer' && video.site === 'YouTube'
     );
@@ -107,10 +114,12 @@ const MovieDetails = () => {
   return (
     <Wrapper>
       <ImageWrapper>
-        <StyledImage
-          src={posterLink + 'w780' + movie.poster_path}
-          alt={movie.title}
-        />
+        <LazyLoad height={200}>
+          <StyledImage
+            src={posterLink + 'w780' + movie.poster_path}
+            alt={movie.title}
+          />
+        </LazyLoad>
         <LinkWrapper>
           <AWrapper href={movie.homepage} target="blank">
             <Button>
@@ -121,7 +130,7 @@ const MovieDetails = () => {
               />
             </Button>
           </AWrapper>
-          <AWrapper>{renderTrailer()}</AWrapper>
+          <AWrapper href="#">{renderTrailer()}</AWrapper>
           <ActiveButton
             onClick={() => handleAddToWatchlist()}
             disabled={watchlistDisabled}

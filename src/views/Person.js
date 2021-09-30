@@ -22,6 +22,8 @@ import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import { LinkWrapper } from 'components/atoms/LinkWrapper/LinkWrapper';
 import { AWrapper } from 'components/atoms/AWrapper/AWrapper';
 import { posterLink } from './Root';
+import LazyLoad from 'react-lazyload';
+import { animateScroll as scroll } from 'react-scroll';
 
 const Person = () => {
   const { id } = useParams();
@@ -41,6 +43,10 @@ const Person = () => {
   }, [id]);
 
   useEffect(() => {
+    scroll.scrollToTop({
+      smooth: true,
+      delay: 500,
+    });
     dispatch(fetchMoviesByPerson(id));
   }, [dispatch, id]);
 
@@ -77,10 +83,12 @@ const Person = () => {
   return (
     <Wrapper>
       <BioWrapper>
-        <StyledImage
-          src={posterLink + 'w780' + info.profile_path}
-          alt={info.name}
-        />
+        <LazyLoad height={100} style={{ width: '60%' }}>
+          <StyledImage
+            src={posterLink + 'w780' + info.profile_path}
+            alt={info.name}
+          />
+        </LazyLoad>
         <DetailsWrapper>
           <StyledName as="h2">{info.name}</StyledName>
           <StyledBirthday>{info.birthday}</StyledBirthday>
@@ -92,10 +100,8 @@ const Person = () => {
           </LinkWrapper>
         </DetailsWrapper>
       </BioWrapper>
-      {/* <MoviesWrapper> */}
       <StyledH2>Also appears in:</StyledH2>
       <MoviesList movies={movies} />
-      {/* </MoviesWrapper> */}
     </Wrapper>
   );
 };
