@@ -8,7 +8,7 @@ export const Wrapper = styled.section`
 
 export const BioWrapper = styled.div`
   width: 80vw;
-  height: 75vh;
+  height: 30%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -29,7 +29,7 @@ export const DetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 8rem;
+  padding: 0 6rem 8rem 4rem;
 `;
 
 export const StyledBirthday = styled.p`
