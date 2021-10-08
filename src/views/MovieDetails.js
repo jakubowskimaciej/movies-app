@@ -19,7 +19,6 @@ import Rating from 'components/molecules/Rating/Rating';
 import { StyledImage } from 'components/atoms/StyledImage/StyledImage';
 import Cast from 'components/organisms/Cast/Cast';
 import { LinkWrapper } from 'components/atoms/LinkWrapper/LinkWrapper';
-import { AWrapper } from 'components/atoms/AWrapper/AWrapper';
 import { Button } from 'components/atoms/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useModal from 'hooks/useModal/useModal';
@@ -75,7 +74,6 @@ const MovieDetails = () => {
 
   const renderTrailer = () => {
     if (videos.length === 0) return null;
-    if (!videos.key) return;
     const { key } = videos.find(
       (video) => video.type === 'Trailer' && video.site === 'YouTube'
     );
@@ -121,16 +119,14 @@ const MovieDetails = () => {
           />
         </LazyLoad>
         <LinkWrapper>
-          <AWrapper href={movie.homepage} target="blank">
-            <Button>
-              Homepage
-              <FontAwesomeIcon
-                icon={['fas', 'link']}
-                style={{ marginLeft: '1rem' }}
-              />
-            </Button>
-          </AWrapper>
-          <AWrapper href="#">{renderTrailer()}</AWrapper>
+          <Button as="a" href={movie.homepage} target="blank">
+            Homepage
+            <FontAwesomeIcon
+              icon={['fas', 'link']}
+              style={{ marginLeft: '1rem' }}
+            />
+          </Button>
+          {renderTrailer()}
           <ActiveButton
             onClick={() => handleAddToWatchlist()}
             disabled={watchlistDisabled}

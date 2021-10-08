@@ -16,6 +16,8 @@ export const Button = styled.button`
   border-radius: 50rem;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 300ms;
+  margin: 0.5rem 0;
+  text-decoration: none;
 
   &:hover {
     box-shadow: 0 0.7rem 0.5rem -0.5rem rgb(115 124 142);
