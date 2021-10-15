@@ -7,4 +7,9 @@ export const Wrapper = styled.main`
   grid-template-columns: 25rem 1fr;
   grid-template-rows: 7rem 1fr;
   position: relative;
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    display: flex;
+    flex-direction: column;
+  }
 `;

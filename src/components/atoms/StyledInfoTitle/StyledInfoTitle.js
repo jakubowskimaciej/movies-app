@@ -6,5 +6,9 @@ export const StyledInfoTitle = styled(Title)`
   font-weight: 600;
   text-transform: uppercase;
   margin: 2rem 0 1rem 0;
-  color: var(--color-darkGrey);
+  color: 'var(--color-white)';
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    color: var(--color-lightGrey);
+  }
 `;

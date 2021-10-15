@@ -17,12 +17,11 @@ import {
   StyledBio,
   StyledH2,
   Wrapper,
+  StyledLazyLoad,
 } from './Person.styles';
 import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import { LinkWrapper } from 'components/atoms/LinkWrapper/LinkWrapper';
-import { AWrapper } from 'components/atoms/AWrapper/AWrapper';
 import { posterLink } from './Root';
-import LazyLoad from 'react-lazyload';
 import { animateScroll as scroll } from 'react-scroll';
 
 const Person = () => {
@@ -53,42 +52,38 @@ const Person = () => {
   const renderWebsite = (link) => {
     if (!link) return;
     return (
-      <AWrapper href={link} target="blank">
-        <Button>
-          Website
-          <FontAwesomeIcon
-            icon={['fas', 'link']}
-            style={{ marginLeft: '1rem' }}
-          />
-        </Button>
-      </AWrapper>
+      <Button as="a" href={link} target="blank">
+        Website
+        <FontAwesomeIcon
+          icon={['fas', 'link']}
+          style={{ marginLeft: '1rem' }}
+        />
+      </Button>
     );
   };
 
   const renderImdb = (id) => {
     if (!id) return;
     return (
-      <AWrapper href={`https://www.imdb.com/name/${id}`} target="blank">
-        <Button>
-          IMDB
-          <FontAwesomeIcon
-            icon={['fab', 'imdb']}
-            style={{ marginLeft: '1rem' }}
-          />
-        </Button>
-      </AWrapper>
+      <Button as="a" href={`https://www.imdb.com/name/${id}`} target="blank">
+        IMDB
+        <FontAwesomeIcon
+          icon={['fab', 'imdb']}
+          style={{ marginLeft: '1rem' }}
+        />
+      </Button>
     );
   };
 
   return (
     <Wrapper>
       <BioWrapper>
-        <LazyLoad height={100} style={{ width: '60%' }}>
+        <StyledLazyLoad height={100}>
           <StyledImage
             src={posterLink + 'w780' + info.profile_path}
             alt={info.name}
           />
-        </LazyLoad>
+        </StyledLazyLoad>
         <DetailsWrapper>
           <StyledName as="h2">{info.name}</StyledName>
           <StyledBirthday>{info.birthday}</StyledBirthday>

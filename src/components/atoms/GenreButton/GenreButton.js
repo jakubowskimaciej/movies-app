@@ -30,6 +30,14 @@ const StyledButton = styled(NavLink).attrs({
   &.active-link {
     border: 0.1rem solid var(--color-grey);
     font-size: ${({ theme }) => theme.fontSize.m};
+
+    @media ${({ theme }) => theme.mediaQueries.medium} {
+      border: 0.1rem solid var(--color-lightGrey);
+    }
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    color: var(--color-lightGrey);
   }
 `;
 

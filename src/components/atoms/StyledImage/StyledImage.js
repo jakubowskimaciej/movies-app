@@ -5,5 +5,5 @@ export const StyledImage = styled.img`
   max-width: 40rem;
   object-fit: cover;
   border-radius: 1.6rem;
-  box-shadow: 0 1.5rem 4.5rem -0.5rem rgb(115 124 142);
+  box-shadow: 0 1rem 5rem -1.5rem rgb(115 124 142);
 `;

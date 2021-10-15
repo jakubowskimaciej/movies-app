@@ -99,6 +99,19 @@ const MovieDetails = () => {
     );
   };
 
+  const renderWebsite = (link) => {
+    if (!link) return null;
+    return (
+      <Button as="a" href={movie.homepage} target="blank">
+        Homepage
+        <FontAwesomeIcon
+          icon={['fas', 'link']}
+          style={{ marginLeft: '1rem' }}
+        />
+      </Button>
+    );
+  };
+
   const handleAddToWatchlist = () => {
     dispatch({
       type: 'ADD_TO_WATCHLIST',
@@ -108,6 +121,8 @@ const MovieDetails = () => {
 
   let storedMovie = watchlist.find((item) => item.id === movie.id);
   const watchlistDisabled = storedMovie ? true : false;
+
+  console.log(movie.homepage);
 
   return (
     <Wrapper>
@@ -119,13 +134,7 @@ const MovieDetails = () => {
           />
         </LazyLoad>
         <LinkWrapper>
-          <Button as="a" href={movie.homepage} target="blank">
-            Homepage
-            <FontAwesomeIcon
-              icon={['fas', 'link']}
-              style={{ marginLeft: '1rem' }}
-            />
-          </Button>
+          {renderWebsite(movie.homepage)}
           {renderTrailer()}
           <ActiveButton
             onClick={() => handleAddToWatchlist()}
