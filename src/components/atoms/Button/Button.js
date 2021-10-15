@@ -18,6 +18,7 @@ export const Button = styled.button`
   transition: all 300ms;
   margin: 0.5rem 0;
   text-decoration: none;
+  font-size: ${({ theme }) => theme.fontSize.m};
 
   &:hover {
     box-shadow: 0 0.7rem 0.5rem -0.5rem rgb(115 124 142);

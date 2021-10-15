@@ -1,23 +1,48 @@
 import styled from 'styled-components';
 import { Title } from 'components/atoms/Title/Title';
+import LazyLoad from 'react-lazyload';
 
 export const Wrapper = styled.section`
   width: 100%;
-  height: 100%;
+  grid-row: 2/2;
+  grid-column: 2/2;
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const StyledLazyLoad = styled(LazyLoad)`
+  width: 65%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    width: 80%;
+    margin: 0 0 3.5rem 0;
+  }
 `;
 
 export const BioWrapper = styled.div`
   width: 80vw;
-  height: 30%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   margin: 5rem auto;
-  padding: 2rem 4rem;
+  padding: 2rem 1rem;
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0;
+  }
 `;
 
 export const StyledName = styled(Title)`
-  font-size: ${({ theme }) => theme.fontSize.xxl};
+  font-size: ${({ theme }) => theme.fontSize.xl};
   font-weight: 300;
   text-transform: uppercase;
   margin-bottom: 0;
@@ -29,7 +54,7 @@ export const DetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0 6rem 8rem 4rem;
+  padding: 0 6rem 2rem 4rem;
 `;
 
 export const StyledBirthday = styled.p`

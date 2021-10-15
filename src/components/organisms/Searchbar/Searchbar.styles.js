@@ -10,16 +10,25 @@ export const SearchbarWrapper = styled.div`
   grid-column: 2/2;
   padding: 0 4rem;
   border-bottom: 0.1rem solid var(--color-lightGrey);
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    justify-content: center;
+    padding: 1rem 0rem 1rem 6rem;
+  }
 `;
 
 export const SearchWrapper = styled.div`
   position: relative;
   width: 45%;
 
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    width: 90%;
+  }
+
   ${Input}:active, {
   ${Input}:focus {
     width: 100%;
-  }
+  };
 `;
 
 export const SearchResults = styled.ul`

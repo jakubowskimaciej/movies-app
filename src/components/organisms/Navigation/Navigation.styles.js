@@ -6,6 +6,10 @@ export const Wrapper = styled.nav`
   border-right: 0.1rem solid var(--color-lightGrey);
   grid-row: 1/3;
   grid-column: 1/2;
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    border-right: none;
+  }
 `;
 
 export const LogoWrapper = styled(Link)`
@@ -29,4 +33,6 @@ export const StyledNavWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 2rem 3rem;
+  position: sticky;
+  top: 0;
 `;
