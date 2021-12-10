@@ -13,6 +13,7 @@ import {
   MovieTagLine,
   ImageWrapper,
   ActiveButton,
+  RatingWrapper,
 } from './MovieDetails.styles';
 import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitle';
 import Rating from 'components/molecules/Rating/Rating';
@@ -150,7 +151,10 @@ const MovieDetails = () => {
         <MovieTitle>{movie.title}</MovieTitle>
         <MovieTagLine>{movie.tagline}</MovieTagLine>
         <DetailWrapper>
-          <Rating value={movie.vote_average / 2} />
+          <RatingWrapper>
+            <Rating value={movie.vote_average / 2} />
+            <p>{movie.vote_average} / 10</p>
+          </RatingWrapper>
           <p>
             {renderInfo(
               movie.spoken_languages,

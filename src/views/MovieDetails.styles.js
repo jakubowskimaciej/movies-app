@@ -69,7 +69,7 @@ export const MovieTagLine = styled.p`
 `;
 
 export const DetailWrapper = styled.div`
-  width: 90%;
+  width: 85%;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -80,6 +80,17 @@ export const DetailWrapper = styled.div`
     font-weight: 500;
     color: var(--color-lightGrey);
     text-transform: uppercase;
+  }
+`;
+
+export const RatingWrapper = styled.div`
+  width: 50%;
+  display: flex;
+  align-items: inherit;
+  justify-content: flex-start;
+  p {
+    font-size: ${({ theme }) => theme.fontSize.l};
+    margin-left: 5rem;
   }
 `;
 
