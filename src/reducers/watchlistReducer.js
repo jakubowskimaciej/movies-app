@@ -1,9 +1,7 @@
 import * as TYPES from 'actions/types';
 
 const INITIAL_STATE = {
-  watchlist: localStorage.getItem('watchlist')
-    ? JSON.parse(localStorage.getItem('watchlist'))
-    : [],
+  watchlist: [],
 };
 
 export const watchlistReducer = (state = INITIAL_STATE, action) => {

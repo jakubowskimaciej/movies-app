@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from 'views/Root';
 import { Provider } from 'react-redux';
-import { store } from 'store';
+import { store, persistor } from 'store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { ThemeProvider } from 'styled-components';
 import theme from 'utils/theme';
@@ -13,10 +14,12 @@ import '../node_modules/react-modal-video/scss/modal-video.scss';
 ReactDOM.render(
   <React.Fragment>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Root />
-      </ThemeProvider>
+      <PersistGate persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          <Root />
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   </React.Fragment>,
   document.getElementById('root')

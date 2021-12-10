@@ -18,8 +18,8 @@ const Watchlist = () => {
       smooth: true,
       delay: 500,
     });
-    localStorage.setItem('watchlist', JSON.stringify(watchlist));
-  }, [watchlist]);
+    // localStorage.setItem('watchlist', JSON.stringify(watchlist));
+  }, []);
 
   return (
     <Wrapper>
