@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitle';
 
 const Navigation = ({ isOpen, clicked }) => {
-  const genres = useSelector((state) => state.genres);
-  const categories = useSelector((state) => state.staticCategories);
+  const genres = useSelector((state) => state.main.genres);
+  const categories = useSelector((state) => state.main.staticCategories);
 
   return (
     <Wrapper isOpen={isOpen}>

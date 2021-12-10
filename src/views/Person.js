@@ -27,7 +27,7 @@ import { animateScroll as scroll } from 'react-scroll';
 const Person = () => {
   const { id } = useParams();
   const [info, setInfo] = useState([]);
-  const movies = useSelector((state) => state.personMovies);
+  const movies = useSelector((state) => state.person.personMovies);
   const dispatch = useDispatch();
 
   useEffect(() => {

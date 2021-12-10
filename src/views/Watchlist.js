@@ -11,7 +11,7 @@ const Wrapper = styled.section`
 `;
 
 const Watchlist = () => {
-  const watchlist = useSelector((state) => state.watchlist);
+  const watchlist = useSelector((state) => state.watchlist.watchlist);
 
   useEffect(() => {
     scroll.scrollToTop({

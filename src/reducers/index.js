@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
-import { moviesReducer } from './moviesReducer';
+import { mainReducer } from './mainReducer';
+import { movieDetailsReducer } from './movieDetailsReducer';
+import { personMoviesReducer } from './personMoviesReducer';
+import { watchlistReducer } from './watchlistReducer';
 
 export default combineReducers({
-  main: moviesReducer,
+  main: mainReducer,
+  movie: movieDetailsReducer,
+  person: personMoviesReducer,
+  watchlist: watchlistReducer,
 });
