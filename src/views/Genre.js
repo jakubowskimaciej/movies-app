@@ -8,8 +8,8 @@ import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
 
 const Genre = () => {
-  const movies = useSelector((state) => state.movies);
-  const genres = useSelector((state) => state.genres);
+  const movies = useSelector((state) => state.main.movies);
+  const genres = useSelector((state) => state.main.genres);
   const dispatch = useDispatch();
   const { name } = useParams();
 

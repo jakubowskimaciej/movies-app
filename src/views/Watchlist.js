@@ -11,15 +11,15 @@ const Wrapper = styled.section`
 `;
 
 const Watchlist = () => {
-  const watchlist = useSelector((state) => state.watchlist);
+  const watchlist = useSelector((state) => state.watchlist.watchlist);
 
   useEffect(() => {
     scroll.scrollToTop({
       smooth: true,
       delay: 500,
     });
-    localStorage.setItem('watchlist', JSON.stringify(watchlist));
-  }, [watchlist]);
+    // localStorage.setItem('watchlist', JSON.stringify(watchlist));
+  }, []);
 
   return (
     <Wrapper>

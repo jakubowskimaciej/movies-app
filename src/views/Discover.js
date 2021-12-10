@@ -8,7 +8,7 @@ import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
 
 const NowPlaying = () => {
-  const movies = useSelector((state) => state.movies);
+  const movies = useSelector((state) => state.main.movies);
   const dispatch = useDispatch();
   const { name } = useParams();
 

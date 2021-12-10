@@ -1,5 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { moviesReducer } from 'reducers/moviesReducer';
+import { persistStore } from 'redux-persist';
 
-export const store = createStore(moviesReducer, applyMiddleware(thunk));
+import reducers from 'reducers';
+
+export const store = createStore(reducers, applyMiddleware(thunk));
+export const persistor = persistStore(store);

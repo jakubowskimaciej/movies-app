@@ -29,9 +29,9 @@ import { animateScroll as scroll } from 'react-scroll';
 
 const MovieDetails = () => {
   const { id } = useParams();
-  const movie = useSelector((state) => state.movieDetails);
-  const videos = useSelector((state) => state.movieVideos);
-  const watchlist = useSelector((state) => state.watchlist);
+  const movie = useSelector((state) => state.movie.movieDetails);
+  const videos = useSelector((state) => state.movie.movieVideos);
+  const watchlist = useSelector((state) => state.watchlist.watchlist);
   const dispatch = useDispatch();
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
@@ -121,8 +121,6 @@ const MovieDetails = () => {
 
   let storedMovie = watchlist.find((item) => item.id === movie.id);
   const watchlistDisabled = storedMovie ? true : false;
-
-  console.log(movie.homepage);
 
   return (
     <Wrapper>
