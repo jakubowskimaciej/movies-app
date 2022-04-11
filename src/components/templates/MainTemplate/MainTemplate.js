@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Navigation from 'components/organisms/Navigation/Navigation';
 import { Wrapper } from './MainTemplate.styles';
 import Searchbar from 'components/organisms/Searchbar/Searchbar';
-
 import MobileMenu from 'components/organisms/MobileMenu/MobileMenu';
 
 const MainTemplate = ({ children }) => {

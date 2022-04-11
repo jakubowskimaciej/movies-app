@@ -1,4 +1,6 @@
 //TYPES AS CONSTS TO AVOID TYPOS
+export const SET_ERROR = 'SET_ERROR';
+export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const REMOVE_LOADING = 'REMOVE_LOADING';
 export const GET_GENRES = 'GET_GENRES';
 export const GET_MOVIES = 'GET_MOVIES';

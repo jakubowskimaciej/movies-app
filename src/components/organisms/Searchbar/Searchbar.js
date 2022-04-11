@@ -13,6 +13,7 @@ import {
 import { posterLink } from 'views/Root';
 import { useSearch } from 'hooks/useSearch/useSearch';
 import LazyLoad from 'react-lazyload';
+import Blank from 'assets/Blank.svg';
 
 const Searchbar = () => {
   const [searchedMovies, setSearchedMovies] = useState([]);
@@ -69,6 +70,11 @@ const Searchbar = () => {
                           : posterLink + 'w185' + item.profile_path
                       }
                       alt={item.title}
+                      onError={(e) => {
+                        if (e.target.src !== `${Blank}`) {
+                          e.target.src = `${Blank}`;
+                        }
+                      }}
                     />
                     <StyledTitle highlighted={highlightedIndex === index}>
                       {item.title ? item.title : item.name}

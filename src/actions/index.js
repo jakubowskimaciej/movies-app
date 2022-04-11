@@ -1,4 +1,6 @@
 import tmdb from 'api/tmdb';
+import * as TYPES from './types';
+import history from '../history';
 
 //on app init
 export const init = () => async (dispatch) => {
@@ -8,11 +10,16 @@ export const init = () => async (dispatch) => {
 
 //fetch genres
 export const fetchGenres = () => async (dispatch) => {
-  const { data } = await tmdb.get('/genre/movie/list');
-  dispatch({
-    type: 'GET_GENRES',
-    payload: data.genres,
-  });
+  try {
+    const { data } = await tmdb.get('/genre/movie/list');
+    dispatch({
+      type: 'GET_GENRES',
+      payload: data.genres,
+    });
+  } catch (err) {
+    dispatch({ type: TYPES.SET_ERROR });
+    history.push('/404');
+  }
 };
 
 //fetch movies by discover
@@ -24,7 +31,8 @@ export const fetchMovies = (name) => async (dispatch) => {
       payload: data.results,
     });
   } catch (err) {
-    console.log(err);
+    dispatch({ type: TYPES.SET_ERROR });
+    history.push('/404');
   }
 };
 
@@ -45,7 +53,8 @@ export const fetchMoviesByGenre = (name, genres) => async (dispatch) => {
       payload: data.results,
     });
   } catch (err) {
-    console.log(err);
+    dispatch({ type: TYPES.SET_ERROR });
+    history.push('/404');
   }
 };
 
@@ -58,7 +67,7 @@ export const fetchMovieDetails = (id) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    console.log(err);
+    console.log('error caught');
   }
 };
 
@@ -91,3 +100,6 @@ export const fetchMoviesByPerson = (id) => async (dispatch) => {
     console.log(err);
   }
 };
+
+export const setError = () => ({ type: TYPES.SET_ERROR });
+export const clearError = () => ({ type: TYPES.CLEAR_ERROR });

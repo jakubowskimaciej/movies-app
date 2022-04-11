@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { errorReducer } from './errorReducer';
 
 import { mainReducer } from './mainReducer';
 import { movieDetailsReducer } from './movieDetailsReducer';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   movie: movieDetailsReducer,
   person: personMoviesReducer,
   watchlist: watchlistReducer,
+  error: errorReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

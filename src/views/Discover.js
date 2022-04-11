@@ -7,7 +7,7 @@ import { animateScroll as scroll } from 'react-scroll';
 import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
 
-const NowPlaying = () => {
+const Discover = () => {
   const movies = useSelector((state) => state.main.movies);
   const dispatch = useDispatch();
   const { name } = useParams();
@@ -19,13 +19,14 @@ const NowPlaying = () => {
     });
     dispatch(fetchMovies(name));
   }, [dispatch, name]);
-
   return (
-    <section>
-      <InfoWrapper name={name} />
-      <MoviesList movies={movies} />
-    </section>
+    <>
+      <section>
+        <InfoWrapper name={name} />
+        <MoviesList movies={movies} />
+      </section>
+    </>
   );
 };
 
-export default NowPlaying;
+export default Discover;

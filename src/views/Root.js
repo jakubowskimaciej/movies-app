@@ -1,20 +1,14 @@
-import React, { useEffect, Suspense, lazy } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { init } from 'actions';
 
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
-
-const Discover = lazy(() => import('./Discover'));
-const Genre = lazy(() => import('./Genre'));
-const MovieDetails = lazy(() => import('./MovieDetails'));
-const Person = lazy(() => import('./Person'));
-const Watchlist = lazy(() => import('./Watchlist'));
+import Discover from './Discover';
+import Watchlist from './Watchlist';
+import Person from './Person';
+import MovieDetails from './MovieDetails';
+import Genre from './Genre';
 
 import {
   faDotCircle,
@@ -29,7 +23,8 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { faImdb } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import Loader from 'components/atoms/Loader/Loader';
+import ShowError from './ShowError';
+import history from '../history';
 
 library.add(
   faDotCircle,
@@ -52,29 +47,28 @@ const Root = () => {
   }, [dispatch]);
 
   return (
-    <Router>
+    <Router history={history}>
       <MainTemplate>
         <Switch>
-          <Suspense fallback={<Loader />}>
-            <Route exact path="/">
-              <Redirect to="/discover/popular" />
-            </Route>
-            <Route path="/discover/:name">
-              <Discover />
-            </Route>
-            <Route path="/genre/:name">
-              <Genre />
-            </Route>
-            <Route path="/movie/:id">
-              <MovieDetails />
-            </Route>
-            <Route path="/person/:id">
-              <Person />
-            </Route>
-            <Route path="/watchlist">
-              <Watchlist />
-            </Route>
-          </Suspense>
+          <Route exact path="/">
+            <Redirect to="/discover/popular" />
+          </Route>
+          <Route path="/discover/:name">
+            <Discover />
+          </Route>
+          <Route path="/genre/:name">
+            <Genre />
+          </Route>
+          <Route path="/movie/:id">
+            <MovieDetails />
+          </Route>
+          <Route path="/person/:id">
+            <Person />
+          </Route>
+          <Route path="/watchlist">
+            <Watchlist />
+          </Route>
+          <Route path="/404" component={ShowError} />
         </Switch>
       </MainTemplate>
     </Router>
