@@ -5,5 +5,4 @@ export const Title = styled.p`
   font-weight: 500;
   color: var(--color-grey);
   text-transform: capitalize;
-  }
 `;

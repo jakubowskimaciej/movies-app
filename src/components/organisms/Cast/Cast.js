@@ -6,10 +6,15 @@ import { CastWrapper, ActorWrapper } from './Cast.styles';
 import { StyledImage } from 'components/atoms/StyledImage/StyledImage';
 import { posterLink } from 'views/Root';
 import LazyLoad from 'react-lazyload';
+import { useDispatch, useSelector } from 'react-redux';
+import * as TYPES from 'actions/types';
 
 const Cast = () => {
   const { id } = useParams();
   const [cast, setCast] = useState([]);
+  const dispatch = useDispatch();
+
+  const error = useSelector((state) => state.error);
 
   useEffect(() => {
     (async () => {
@@ -17,10 +22,12 @@ const Cast = () => {
         const { data } = await tmdb.get(`/movie/${id}/credits`);
         setCast(data.cast);
       } catch (err) {
-        console.log(err);
+        dispatch({ type: TYPES.SET_ERROR, payload: err.response });
       }
     })();
-  }, [id]);
+  }, [id, dispatch]);
+
+  console.log(error);
 
   return (
     <LazyLoad>

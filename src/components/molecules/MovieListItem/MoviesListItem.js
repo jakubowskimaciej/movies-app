@@ -11,6 +11,7 @@ import {
   Wrapper,
 } from './MovieListItem.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Blank from 'assets/Blank.svg';
 
 const MovieListItem = ({
   onClick,
@@ -30,7 +31,15 @@ const MovieListItem = ({
   return (
     <Wrapper>
       <StyledLink to={`/movie/${id}`} onClick={onClick}>
-        <Image src={posterLink + 'w342' + poster_path} alt={title} />
+        <Image
+          src={posterLink + 'w342' + poster_path}
+          alt={title}
+          onError={(e) => {
+            if (e.target.src !== `${Blank}`) {
+              e.target.src = `${Blank}`;
+            }
+          }}
+        />
         <InfoWrapper>
           <StyledTitle>{title}</StyledTitle>
           <StyledRating value={vote_average / 2} />

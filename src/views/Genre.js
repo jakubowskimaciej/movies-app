@@ -21,6 +21,15 @@ const Genre = () => {
     dispatch(fetchMoviesByGenre(name, genres));
   }, [dispatch, name, genres]);
 
+  console.log(name, genres);
+
+  const genreId = genres
+    .filter((el) => el.name === name)
+    .map((el) => el.id)
+    .join('');
+
+  console.log(genreId);
+
   return (
     <section>
       <InfoWrapper name={name} />

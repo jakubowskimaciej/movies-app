@@ -54,6 +54,10 @@ export const Image = styled(StyledImage)`
   ${StyledLink}:hover & {
     box-shadow: none;
   }
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    height: 30rem;
+  }
 `;
 
 export const InfoWrapper = styled.div`

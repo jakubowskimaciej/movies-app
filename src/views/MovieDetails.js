@@ -27,6 +27,7 @@ import ModalVideo from 'react-modal-video';
 import { posterLink } from './Root';
 import LazyLoad from 'react-lazyload';
 import { animateScroll as scroll } from 'react-scroll';
+import Blank from 'assets/Blank.svg';
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -130,6 +131,11 @@ const MovieDetails = () => {
           <StyledImage
             src={posterLink + 'w780' + movie.poster_path}
             alt={movie.title}
+            onError={(e) => {
+              if (e.target.src !== `${Blank}`) {
+                e.target.src = `${Blank}`;
+              }
+            }}
           />
         </LazyLoad>
         <LinkWrapper>
