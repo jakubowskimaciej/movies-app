@@ -10,6 +10,11 @@ const INITIAL_STATE = {
 
 export const mainReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case TYPES.SET_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     case TYPES.REMOVE_LOADING:
       return {
         ...state,

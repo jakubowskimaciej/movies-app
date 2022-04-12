@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieListItem from 'components/molecules/MovieListItem/MoviesListItem';
-import { ButtonWrapper, Wrapper } from './MoviesList.styles';
-import { Button } from 'components/atoms/Button/Button';
+import { Wrapper } from './MoviesList.styles';
+import Pagination from '../Pagination/Pagination';
 
 const MoviesList = ({ movies = [], inWatchlist }) => {
   return (
@@ -15,10 +15,7 @@ const MoviesList = ({ movies = [], inWatchlist }) => {
           />
         ))}
       </Wrapper>
-      <ButtonWrapper>
-        <Button>Previous page</Button>
-        <Button isSecondary>Next page</Button>
-      </ButtonWrapper>
+      <Pagination />
     </>
   );
 };

@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import styled from 'styled-components';
-import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
+
+import { useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
+
+import MoviesList from 'components/molecules/MoviesList/MoviesList';
+import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
+import Loader from 'components/atoms/Loader/Loader';
 
 const Wrapper = styled.section`
   width: 100%;
@@ -12,20 +15,26 @@ const Wrapper = styled.section`
 
 const Watchlist = () => {
   const watchlist = useSelector((state) => state.watchlist.watchlist);
+  const loading = useSelector((state) => state.main.loading);
 
   useEffect(() => {
     scroll.scrollToTop({
       smooth: true,
       delay: 500,
     });
-    // localStorage.setItem('watchlist', JSON.stringify(watchlist));
   }, []);
 
   return (
-    <Wrapper>
-      <InfoWrapper name="watchlist">Watchlist</InfoWrapper>
-      <MoviesList movies={watchlist} inWatchlist />
-    </Wrapper>
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Wrapper>
+          <InfoWrapper name="watchlist">Watchlist</InfoWrapper>
+          <MoviesList movies={watchlist} inWatchlist />
+        </Wrapper>
+      )}
+    </>
   );
 };
 

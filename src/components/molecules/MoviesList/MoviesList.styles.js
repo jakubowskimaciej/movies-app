@@ -14,11 +14,3 @@ export const Wrapper = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(10rem, 20rem));
   }
 `;
-
-export const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: 2rem;
-`;

@@ -2,18 +2,16 @@ import React from 'react';
 import { ReactComponent as MoviesLogo } from 'assets/movies-logo.svg';
 import { Wrapper, LogoWrapper, StyledNavWrapper } from './Navigation.styles';
 import GenreButton from 'components/atoms/GenreButton/GenreButton';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitle';
-import { clearError } from 'actions';
 
 const Navigation = ({ isOpen, clicked, history }) => {
   const genres = useSelector((state) => state.main.genres);
   const categories = useSelector((state) => state.main.staticCategories);
-  const dispatch = useDispatch();
 
   return (
     <Wrapper isOpen={isOpen}>
-      <LogoWrapper to="/" onClick={() => dispatch(clearError())}>
+      <LogoWrapper to="/">
         <MoviesLogo />
       </LogoWrapper>
       <StyledNavWrapper>

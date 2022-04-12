@@ -25,6 +25,7 @@ import { faImdb } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import ShowError from './ShowError';
 import history from '../history';
+import tmdb from 'api/tmdb';
 
 library.add(
   faDotCircle,
@@ -45,6 +46,13 @@ const Root = () => {
   useEffect(() => {
     dispatch(init());
   }, [dispatch]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await tmdb.get('/configuration');
+      console.log(res);
+    })();
+  }, []);
 
   return (
     <Router history={history}>
@@ -69,6 +77,7 @@ const Root = () => {
             <Watchlist />
           </Route>
           <Route path="/404" component={ShowError} />
+          <Route path="*" component={ShowError} />
         </Switch>
       </MainTemplate>
     </Router>
