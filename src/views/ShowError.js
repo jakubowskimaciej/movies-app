@@ -54,6 +54,12 @@ const StyledMessage = styled.div`
 const ShowError = () => {
   const dispatch = useDispatch();
 
+  React.useEffect(() => {
+    return () => {
+      dispatch(clearError());
+    };
+  }, [dispatch]);
+
   return (
     <Wrapper>
       <StyledMessage>

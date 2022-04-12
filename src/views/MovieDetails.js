@@ -74,7 +74,7 @@ const MovieDetails = () => {
     ));
   };
 
-  const renderTrailer = () => {
+  const renderTrailer = (videos) => {
     if (videos.length === 0) return null;
     const { key } = videos.find(
       (video) => video.type === 'Trailer' && video.site === 'YouTube'
@@ -140,7 +140,7 @@ const MovieDetails = () => {
         </LazyLoad>
         <LinkWrapper>
           {renderWebsite(movie.homepage)}
-          {renderTrailer()}
+          {renderTrailer(videos)}
           <ActiveButton
             onClick={() => handleAddToWatchlist()}
             disabled={watchlistDisabled}

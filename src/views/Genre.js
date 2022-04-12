@@ -1,40 +1,45 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchMoviesByGenre } from 'actions';
 import { useParams } from 'react-router';
+import { useLocation } from 'react-router-dom';
+import { clearMovies, fetchMoviesByGenre } from 'actions';
+
 import { animateScroll as scroll } from 'react-scroll';
+import queryString from 'query-string';
 
 import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import InfoWrapper from 'components/molecules/InfoWrapper/InfoWrapper';
+import Loader from 'components/atoms/Loader/Loader';
 
 const Genre = () => {
-  const movies = useSelector((state) => state.main.movies);
-  const genres = useSelector((state) => state.main.genres);
+  const { loading, genres, movies } = useSelector((state) => state.main);
   const dispatch = useDispatch();
   const { name } = useParams();
+  const location = useLocation();
+
+  const { page } = queryString.parse(location.search);
 
   useEffect(() => {
     scroll.scrollToTop({
       smooth: true,
-      delay: 500,
+      delay: 150,
     });
-    dispatch(fetchMoviesByGenre(name, genres));
-  }, [dispatch, name, genres]);
+    dispatch(fetchMoviesByGenre(name, genres, page));
 
-  console.log(name, genres);
-
-  const genreId = genres
-    .filter((el) => el.name === name)
-    .map((el) => el.id)
-    .join('');
-
-  console.log(genreId);
+    return () => clearMovies();
+  }, [dispatch, name, genres, page]);
 
   return (
-    <section>
-      <InfoWrapper name={name} />
-      <MoviesList movies={movies} />
-    </section>
+    <>
+      {loading && !movies.length ? (
+        <Loader />
+      ) : (
+        <section>
+          <InfoWrapper name={name} />
+          <MoviesList movies={movies.results} />
+        </section>
+      )}
+    </>
   );
 };
 
