@@ -5,9 +5,9 @@ import PersonPic from 'assets/PersonPic.svg';
 import { CastWrapper, ActorWrapper } from './Cast.styles';
 import { StyledImage } from 'components/atoms/StyledImage/StyledImage';
 import { posterLink } from 'views/Root';
-import LazyLoad from 'react-lazyload';
 import { useDispatch } from 'react-redux';
 import * as TYPES from 'actions/types';
+import Loader from 'components/atoms/Loader/Loader';
 
 const Cast = () => {
   const { id } = useParams();
@@ -26,9 +26,11 @@ const Cast = () => {
   }, [id, dispatch]);
 
   return (
-    <LazyLoad>
-      <CastWrapper>
-        {cast.map((person) => (
+    <CastWrapper>
+      {!cast.length ? (
+        <Loader isSmall />
+      ) : (
+        cast.map((person) => (
           <ActorWrapper key={person.id} to={`/person/${person.id}`}>
             <StyledImage
               src={posterLink + 'w185' + person.profile_path}
@@ -45,9 +47,9 @@ const Cast = () => {
               <p>as {person.character}</p>
             </div>
           </ActorWrapper>
-        ))}
-      </CastWrapper>
-    </LazyLoad>
+        ))
+      )}
+    </CastWrapper>
   );
 };
 

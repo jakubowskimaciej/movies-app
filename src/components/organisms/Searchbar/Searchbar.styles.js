@@ -57,8 +57,7 @@ export const SearchResultsItem = styled.li`
   padding: 1rem 0.5rem;
   border-radius: 1.2rem;
   transition: all 200ms ease-in-out;
-  background-color: ${({ theme, highlighted }) =>
-    highlighted ? theme.colors.darkGrey : theme.colors.white};
+  background-color: ${({ theme, highlighted }) => (highlighted ? theme.colors.darkGrey : theme.colors.white)};
   color: white;
 
   &:not(:last-child) {
@@ -87,8 +86,7 @@ export const StyledLink = styled(Link)`
 export const StyledTitle = styled.p`
   font-size: ${({ theme }) => theme.fontSize.l};
   font-weight: 500;
-  color: ${({ highlighted }) =>
-    highlighted ? 'var(--color-white)' : 'var(--color-darkGrey)'};
+  color: ${({ highlighted }) => (highlighted ? 'var(--color-white)' : 'var(--color-darkGrey)')};
   margin-left: 2rem;
 
   ${SearchResultsItem}:hover & {

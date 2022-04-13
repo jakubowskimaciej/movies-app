@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import history from '../../../history';
 
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { scroller } from 'react-scroll';
 
 import { Button } from 'components/atoms/Button/Button';
 
@@ -15,22 +15,26 @@ const ButtonWrapper = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Pagination = () => {
+const Pagination = ({ page, total_pages }) => {
   const params = useLocation();
-  const { page, total_pages } = useSelector((state) => state.main.movies);
+
+  // const scrollTo = () => {
+  //   scroller.scrollTo('scroll-to-element', {
+  //     duration: 1500,
+  //     smooth: 'easeInOutQuart',
+  //     offset: -50,
+  //   });
+  // };
 
   //if only 1 page
-  if (total_pages === 1) return null;
+  if (total_pages === 1 || !total_pages) return null;
   if (params.pathname === '/watchlist') return null;
 
   //on first page, render next page button only
   if (page < total_pages && page === 1) {
     return (
       <ButtonWrapper>
-        <Button
-          isSecondary
-          onClick={() => history.push(`${params.pathname}?page=${page + 1}`)}
-        >
+        <Button isSecondary onClick={() => history.push(`${params.pathname}?page=${page + 1}`)}>
           Next page
         </Button>
       </ButtonWrapper>
@@ -40,16 +44,9 @@ const Pagination = () => {
   else if (page < total_pages) {
     return (
       <ButtonWrapper>
-        <Button
-          onClick={() => history.push(`${params.pathname}?page=${page - 1}`)}
-        >
-          Previous page
-        </Button>
+        <Button onClick={() => history.push(`${params.pathname}?page=${page - 1}`)}>Previous page</Button>
 
-        <Button
-          isSecondary
-          onClick={() => history.push(`${params.pathname}?page=${page + 1}`)}
-        >
+        <Button isSecondary onClick={() => history.push(`${params.pathname}?page=${page + 1}`)} to="scroll-to-element">
           Next page
         </Button>
       </ButtonWrapper>
@@ -60,11 +57,7 @@ const Pagination = () => {
   else {
     return (
       <ButtonWrapper>
-        <Button
-          onClick={() => history.push(`${params.pathname}?page=${page - 1}`)}
-        >
-          Previous page
-        </Button>
+        <Button onClick={() => history.push(`${params.pathname}?page=${page - 1}`)}>Previous page</Button>
       </ButtonWrapper>
     );
   }

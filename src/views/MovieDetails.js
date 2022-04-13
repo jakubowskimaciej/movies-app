@@ -28,12 +28,14 @@ import { posterLink } from './Root';
 import LazyLoad from 'react-lazyload';
 import { animateScroll as scroll } from 'react-scroll';
 import Blank from 'assets/Blank.svg';
+import Loader from 'components/atoms/Loader/Loader';
 
 const MovieDetails = () => {
   const { id } = useParams();
-  const movie = useSelector((state) => state.movie.movieDetails);
-  const videos = useSelector((state) => state.movie.movieVideos);
-  const watchlist = useSelector((state) => state.watchlist.watchlist);
+  const { movieVideos, movieDetails } = useSelector((state) => state.movie);
+  const { inWatchlist } = useSelector((state) => state.inWatchlist);
+  const { loading } = useSelector((state) => state.main);
+
   const dispatch = useDispatch();
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
@@ -76,27 +78,15 @@ const MovieDetails = () => {
 
   const renderTrailer = (videos) => {
     if (videos.length === 0) return null;
-    const { key } = videos.find(
-      (video) => video.type === 'Trailer' && video.site === 'YouTube'
-    );
+    const { key } = videos.find((video) => video.type === 'Trailer' && video.site === 'YouTube');
 
     return (
       <>
         <Button isSecondary onClick={handleOpenModal}>
           Trailer
-          <FontAwesomeIcon
-            icon={['fas', 'play-circle']}
-            style={{ marginLeft: '1rem' }}
-          />
+          <FontAwesomeIcon icon={['fas', 'play-circle']} style={{ marginLeft: '1rem' }} />
         </Button>
-        {isModalOpen ? (
-          <ModalVideo
-            channel="youtube"
-            isOpen={isModalOpen}
-            videoId={key}
-            onClose={handleCloseModal}
-          />
-        ) : null}
+        {isModalOpen ? <ModalVideo channel="youtube" isOpen={isModalOpen} videoId={key} onClose={handleCloseModal} /> : null}
       </>
     );
   };
@@ -104,12 +94,9 @@ const MovieDetails = () => {
   const renderWebsite = (link) => {
     if (!link) return null;
     return (
-      <Button as="a" href={movie.homepage} target="blank">
+      <Button as="a" href={movieDetails.homepage} target="blank">
         Homepage
-        <FontAwesomeIcon
-          icon={['fas', 'link']}
-          style={{ marginLeft: '1rem' }}
-        />
+        <FontAwesomeIcon icon={['fas', 'link']} style={{ marginLeft: '1rem' }} />
       </Button>
     );
   };
@@ -117,72 +104,66 @@ const MovieDetails = () => {
   const handleAddToWatchlist = () => {
     dispatch({
       type: 'ADD_TO_WATCHLIST',
-      payload: movie,
+      payload: movieDetails,
     });
   };
 
-  let storedMovie = watchlist.find((item) => item.id === movie.id);
+  let storedMovie = inWatchlist.find((item) => item.id === movieDetails.id);
   const watchlistDisabled = storedMovie ? true : false;
 
   return (
-    <Wrapper>
-      <ImageWrapper>
-        <LazyLoad height={200}>
-          <StyledImage
-            src={posterLink + 'w780' + movie.poster_path}
-            alt={movie.title}
-            onError={(e) => {
-              if (e.target.src !== `${Blank}`) {
-                e.target.src = `${Blank}`;
-              }
-            }}
-          />
-        </LazyLoad>
-        <LinkWrapper>
-          {renderWebsite(movie.homepage)}
-          {renderTrailer(videos)}
-          <ActiveButton
-            onClick={() => handleAddToWatchlist()}
-            disabled={watchlistDisabled}
-          >
-            Add to Watchlist
-            <FontAwesomeIcon
-              icon={['fas', 'plus-circle']}
-              style={{ marginLeft: '1rem' }}
-            />
-          </ActiveButton>
-        </LinkWrapper>
-      </ImageWrapper>
-      <MovieInfo>
-        <MovieTitle>{movie.title}</MovieTitle>
-        <MovieTagLine>{movie.tagline}</MovieTagLine>
-        <DetailWrapper>
-          <RatingWrapper>
-            <Rating value={movie.vote_average / 2} />
-            <p>{movie.vote_average} / 10</p>
-          </RatingWrapper>
-          <p>
-            {renderInfo(
-              movie.spoken_languages,
-              movie.runtime,
-              splitDate(movie.release_date)
-            )}
-          </p>
-        </DetailWrapper>
-        <InfoWrapper>
-          <StyledInfoTitle as="h2">the genres:</StyledInfoTitle>
-          <GenreWrapper>{renderGenres(movie.genres)}</GenreWrapper>
-        </InfoWrapper>
-        <InfoWrapper>
-          <StyledInfoTitle as="h2">Storyline:</StyledInfoTitle>
-          <p>{movie.overview}</p>
-        </InfoWrapper>
-        <InfoWrapper>
-          <StyledInfoTitle as="h2">Cast:</StyledInfoTitle>
-          <Cast />
-        </InfoWrapper>
-      </MovieInfo>
-    </Wrapper>
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Wrapper>
+          <ImageWrapper>
+            <LazyLoad height={200}>
+              <StyledImage
+                src={posterLink + 'w780' + movieDetails.poster_path}
+                alt={movieDetails.title}
+                onError={(e) => {
+                  if (e.target.src !== `${Blank}`) {
+                    e.target.src = `${Blank}`;
+                  }
+                }}
+              />
+            </LazyLoad>
+            <LinkWrapper>
+              {renderWebsite(movieDetails.homepage)}
+              {renderTrailer(movieVideos)}
+              <ActiveButton onClick={() => handleAddToWatchlist()} disabled={watchlistDisabled}>
+                Add to Watchlist
+                <FontAwesomeIcon icon={['fas', 'plus-circle']} style={{ marginLeft: '1rem' }} />
+              </ActiveButton>
+            </LinkWrapper>
+          </ImageWrapper>
+          <MovieInfo>
+            <MovieTitle>{movieDetails.title}</MovieTitle>
+            <MovieTagLine>{movieDetails.tagline}</MovieTagLine>
+            <DetailWrapper>
+              <RatingWrapper>
+                <Rating value={movieDetails.vote_average / 2} />
+                <p>{movieDetails.vote_average} / 10</p>
+              </RatingWrapper>
+              <p>{renderInfo(movieDetails.spoken_languages, movieDetails.runtime, splitDate(movieDetails.release_date))}</p>
+            </DetailWrapper>
+            <InfoWrapper>
+              <StyledInfoTitle as="h2">the genres:</StyledInfoTitle>
+              <GenreWrapper>{renderGenres(movieDetails.genres)}</GenreWrapper>
+            </InfoWrapper>
+            <InfoWrapper>
+              <StyledInfoTitle as="h2">Storyline:</StyledInfoTitle>
+              <p>{movieDetails.overview}</p>
+            </InfoWrapper>
+            <InfoWrapper>
+              <StyledInfoTitle as="h2">Cast:</StyledInfoTitle>
+              <Cast />
+            </InfoWrapper>
+          </MovieInfo>
+        </Wrapper>
+      )}
+    </>
   );
 };
 

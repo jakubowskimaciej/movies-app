@@ -3,19 +3,15 @@ import MovieListItem from 'components/molecules/MovieListItem/MoviesListItem';
 import { Wrapper } from './MoviesList.styles';
 import Pagination from '../Pagination/Pagination';
 
-const MoviesList = ({ movies = [], inWatchlist }) => {
+const MoviesList = ({ movies = [], page, totalPages, inWatchlist }) => {
   return (
     <>
       <Wrapper>
         {movies.map((movieData) => (
-          <MovieListItem
-            key={movieData.id}
-            movieData={movieData}
-            inWatchlist={inWatchlist}
-          />
+          <MovieListItem key={movieData.id} movieData={movieData} inWatchlist={inWatchlist} />
         ))}
       </Wrapper>
-      <Pagination />
+      <Pagination movies={movies} page={page} total_pages={totalPages} />
     </>
   );
 };

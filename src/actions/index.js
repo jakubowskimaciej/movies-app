@@ -108,26 +108,28 @@ export const fetchMovieVideos = (id) => async (dispatch) => {
 };
 
 //fetch movies where person appears
-export const fetchMoviesByPerson = (id) => async (dispatch) => {
+export const fetchMoviesByPerson = (id, page) => async (dispatch) => {
   try {
     dispatch({ type: TYPES.SET_LOADING });
 
     const { data } = await tmdb.get(`/discover/movie`, {
       params: {
         with_cast: id,
+        page,
       },
     });
     await dispatch({
       type: 'GET_PERSON_MOVIES',
-      payload: data.results,
+      payload: data,
     });
     dispatch({ type: TYPES.REMOVE_LOADING });
   } catch (err) {
     dispatch({ type: TYPES.SET_ERROR });
-    history.push('/404');
   }
 };
 
+export const setLoading = () => ({ type: TYPES.SET_LOADING });
+export const clearLoading = () => ({ type: TYPES.REMOVE_LOADING });
 export const setError = () => ({ type: TYPES.SET_ERROR });
 export const clearError = () => ({ type: TYPES.CLEAR_ERROR });
 export const clearMovies = () => {

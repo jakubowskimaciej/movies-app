@@ -141,11 +141,8 @@ export const ActiveButton = styled(Button)`
   padding: 1rem 2rem;
   margin: 1rem 0;
   font-size: ${({ theme }) => theme.fontSize.l};
-  border: 0.1rem solid
-    ${({ isSecondary }) =>
-      isSecondary ? 'var(--color-darkGrey)' : 'var(--color-success)'};
-  background-color: ${({ isSecondary }) =>
-    isSecondary ? 'var(--color-darkGrey)' : 'var(--color-success)'};
+  border: 0.1rem solid ${({ isSecondary }) => (isSecondary ? 'var(--color-darkGrey)' : 'var(--color-success)')};
+  background-color: ${({ isSecondary }) => (isSecondary ? 'var(--color-darkGrey)' : 'var(--color-success)')};
   color: var(--color-white);
 
   &:active {

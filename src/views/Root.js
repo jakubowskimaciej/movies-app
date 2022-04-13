@@ -10,33 +10,15 @@ import Person from './Person';
 import MovieDetails from './MovieDetails';
 import Genre from './Genre';
 
-import {
-  faDotCircle,
-  faLink,
-  faPlayCircle,
-  faPlusCircle,
-} from '@fortawesome/free-solid-svg-icons';
-import {
-  faWindowClose,
-  faTimesCircle,
-  faTrashAlt,
-} from '@fortawesome/free-regular-svg-icons';
+import { faDotCircle, faLink, faPlayCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faWindowClose, faTimesCircle, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faImdb } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import ShowError from './ShowError';
 import history from '../history';
 import tmdb from 'api/tmdb';
 
-library.add(
-  faDotCircle,
-  faImdb,
-  faLink,
-  faPlayCircle,
-  faWindowClose,
-  faTimesCircle,
-  faPlusCircle,
-  faTrashAlt
-);
+library.add(faDotCircle, faImdb, faLink, faPlayCircle, faWindowClose, faTimesCircle, faPlusCircle, faTrashAlt);
 
 export const posterLink = `https://image.tmdb.org/t/p/`;
 

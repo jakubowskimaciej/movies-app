@@ -1,23 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { posterLink } from 'views/Root';
-import {
-  StyledLink,
-  Image,
-  InfoWrapper,
-  StyledTitle,
-  StyledRating,
-  StyledButton,
-  Wrapper,
-} from './MovieListItem.styles';
+import { StyledLink, Image, InfoWrapper, StyledTitle, StyledRating, StyledButton, Wrapper } from './MovieListItem.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Blank from 'assets/Blank.svg';
 
-const MovieListItem = ({
-  onClick,
-  inWatchlist,
-  movieData: { title, poster_path, vote_average, id },
-}) => {
+const MovieListItem = ({ onClick, inWatchlist, movieData: { title, poster_path, vote_average, id } }) => {
   const dispatch = useDispatch();
 
   //delete movie from watchlist

@@ -14,8 +14,10 @@ const Wrapper = styled.section`
 `;
 
 const Watchlist = () => {
-  const watchlist = useSelector((state) => state.watchlist.watchlist);
+  const { inWatchlist } = useSelector((state) => state.inWatchlist);
   const loading = useSelector((state) => state.main.loading);
+
+  console.log(inWatchlist);
 
   useEffect(() => {
     scroll.scrollToTop({
@@ -31,7 +33,7 @@ const Watchlist = () => {
       ) : (
         <Wrapper>
           <InfoWrapper name="watchlist">Watchlist</InfoWrapper>
-          <MoviesList movies={watchlist} inWatchlist />
+          <MoviesList movies={inWatchlist} inWatchlist />
         </Wrapper>
       )}
     </>

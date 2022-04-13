@@ -29,8 +29,6 @@ const Discover = () => {
     return () => clearMovies();
   }, [dispatch, name, page]);
 
-  console.log(movies);
-
   return (
     <>
       {loading && !movies.length ? (
@@ -38,7 +36,7 @@ const Discover = () => {
       ) : (
         <section>
           <InfoWrapper name={name} />
-          <MoviesList movies={movies.results} />
+          <MoviesList movies={movies.results} page={movies.page} totalPages={movies.total_pages} />
         </section>
       )}
     </>

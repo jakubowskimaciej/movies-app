@@ -8,9 +8,7 @@ const MainTemplate = ({ children }) => {
   const [isMobile, setIsMobile] = useState(null);
 
   const changeMobile = () => {
-    window.matchMedia('(max-width: 56.25em)').matches
-      ? setIsMobile(true)
-      : setIsMobile(false);
+    window.matchMedia('(max-width: 56.25em)').matches ? setIsMobile(true) : setIsMobile(false);
   };
 
   useEffect(() => {
