@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovieDetails, fetchMovieVideos } from 'actions';
@@ -25,13 +25,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useModal from 'hooks/useModal/useModal';
 import ModalVideo from 'react-modal-video';
 import { posterLink } from './Root';
-import LazyLoad from 'react-lazyload';
 import { animateScroll as scroll } from 'react-scroll';
 import Blank from 'assets/Blank.svg';
 import Loader from 'components/atoms/Loader/Loader';
+import { ImgLoading } from './Person.styles';
 
 const MovieDetails = () => {
   const { id } = useParams();
+  const [loaded, setLoaded] = useState(false);
   const { movieVideos, movieDetails } = useSelector((state) => state.movie);
   const { inWatchlist } = useSelector((state) => state.inWatchlist);
   const { loading } = useSelector((state) => state.main);
@@ -118,17 +119,23 @@ const MovieDetails = () => {
       ) : (
         <Wrapper>
           <ImageWrapper>
-            <LazyLoad height={200}>
-              <StyledImage
-                src={posterLink + 'w780' + movieDetails.poster_path}
-                alt={movieDetails.title}
-                onError={(e) => {
-                  if (e.target.src !== `${Blank}`) {
-                    e.target.src = `${Blank}`;
-                  }
-                }}
-              />
-            </LazyLoad>
+            {!loaded ? (
+              <ImgLoading>
+                <Loader />
+              </ImgLoading>
+            ) : null}
+            <StyledImage
+              src={posterLink + 'w780' + movieDetails.poster_path}
+              alt={movieDetails.title}
+              onLoad={() => setLoaded(true)}
+              onError={(e) => {
+                if (e.target.src !== `${Blank}`) {
+                  e.target.src = `${Blank}`;
+                }
+              }}
+              style={!loaded ? { display: 'none' } : {}}
+            />
+
             <LinkWrapper>
               {renderWebsite(movieDetails.homepage)}
               {renderTrailer(movieVideos)}

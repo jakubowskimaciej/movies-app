@@ -19,10 +19,27 @@ export const StyledLazyLoad = styled(LazyLoad)`
   justify-content: center;
   margin-top: 2.5rem;
 
+  img {
+    max-height: 60rem;
+    object-fit: contain;
+  }
+
   @media ${({ theme }) => theme.mediaQueries.medium} {
     width: 80%;
     margin: 0 0 3.5rem 0;
   }
+`;
+
+export const ImgLoading = styled.div`
+  width: 100%;
+  max-width: 40rem;
+  max-height: 80rem;
+  flex: 1 1 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transition: all 100ms cubic-bezier(0.645, 0.045, 0.355, 1);
 `;
 
 export const BioWrapper = styled.div`

@@ -12,24 +12,25 @@ import queryString from 'query-string';
 import { StyledImage } from 'components/atoms/StyledImage/StyledImage';
 import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitle';
 import { Button } from 'components/atoms/Button/Button';
+import PersonError from 'assets/PersonError.svg';
 
-import { BioWrapper, StyledName, DetailsWrapper, StyledBirthday, StyledBio, StyledH2, Wrapper, StyledLazyLoad } from './Person.styles';
+import { BioWrapper, StyledName, DetailsWrapper, StyledBirthday, StyledBio, StyledH2, Wrapper, StyledLazyLoad, ImgLoading } from './Person.styles';
 import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import { LinkWrapper } from 'components/atoms/LinkWrapper/LinkWrapper';
 import { posterLink } from './Root';
-import { Element, animateScroll as scroll } from 'react-scroll';
+import { Element, scroller } from 'react-scroll';
 import Loader from 'components/atoms/Loader/Loader';
 
 const Person = () => {
   const { id } = useParams();
   const [info, setInfo] = useState([]);
+  const [loaded, setLoaded] = useState(false);
   const { personMovies } = useSelector((state) => state.person);
   const { loading } = useSelector((state) => state.main);
   const dispatch = useDispatch();
   const location = useLocation();
 
   const { page } = queryString.parse(location.search);
-  console.log(personMovies);
 
   useEffect(() => {
     (async () => {
@@ -45,9 +46,10 @@ const Person = () => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    scroll.scrollToTop({
-      smooth: true,
-      delay: 500,
+    scroller.scrollTo('scroll-to-element', {
+      duration: 1500,
+      smooth: 'easeInOutQuart',
+      offset: -280,
     });
     dispatch(fetchMoviesByPerson(id, page));
   }, [dispatch, id, page]);
@@ -80,7 +82,22 @@ const Person = () => {
         <Wrapper>
           <BioWrapper>
             <StyledLazyLoad height={100}>
-              <StyledImage src={posterLink + 'w780' + info.profile_path} alt={info.name} />
+              {!loaded ? (
+                <ImgLoading>
+                  <Loader />
+                </ImgLoading>
+              ) : null}
+              <StyledImage
+                src={posterLink + 'w780' + info.profile_path}
+                alt={info.name}
+                onLoad={() => setLoaded(true)}
+                onError={(e) => {
+                  if (e.target.src !== `${PersonError}`) {
+                    e.target.src = `${PersonError}`;
+                  }
+                }}
+                style={!loaded ? { display: 'none' } : {}}
+              />
             </StyledLazyLoad>
             <DetailsWrapper>
               <StyledName as="h2">{info.name}</StyledName>

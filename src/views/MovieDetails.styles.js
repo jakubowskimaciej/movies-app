@@ -23,6 +23,7 @@ export const Wrapper = styled.section`
 export const ImageWrapper = styled.div`
   width: 90%;
   height: 100%;
+  max-height: 80rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

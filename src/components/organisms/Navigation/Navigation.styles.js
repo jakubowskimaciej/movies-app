@@ -20,6 +20,7 @@ export const LogoWrapper = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 7rem;
 
   svg {
     width: 90%;

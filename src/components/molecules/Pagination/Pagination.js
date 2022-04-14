@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import history from '../../../history';
 
 import { useLocation } from 'react-router-dom';
-// import { scroller } from 'react-scroll';
 
 import { Button } from 'components/atoms/Button/Button';
 
@@ -17,14 +16,6 @@ const ButtonWrapper = styled.div`
 
 const Pagination = ({ page, total_pages }) => {
   const params = useLocation();
-
-  // const scrollTo = () => {
-  //   scroller.scrollTo('scroll-to-element', {
-  //     duration: 1500,
-  //     smooth: 'easeInOutQuart',
-  //     offset: -50,
-  //   });
-  // };
 
   //if only 1 page
   if (total_pages === 1 || !total_pages) return null;
