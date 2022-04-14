@@ -26,6 +26,10 @@ export const LogoWrapper = styled(Link)`
     width: 90%;
     height: 90%;
   }
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    margin-top: 2rem;
+  }
 `;
 
 export const StyledNavWrapper = styled.div`
