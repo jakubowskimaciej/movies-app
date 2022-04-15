@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useCombobox } from 'downshift';
 import debounce from 'lodash.debounce';
 import { Input } from 'components/atoms/Input/Input';
-import { SearchbarWrapper, SearchResults, SearchResultsItem, SearchWrapper, StyledLink, StyledTitle } from './Searchbar.styles';
+import { ImageWrapper, SearchbarWrapper, SearchResults, SearchResultsItem, SearchWrapper, StyledLink, StyledTitle } from './Searchbar.styles';
 import { posterLink } from 'views/Root';
 import { useSearch } from 'hooks/useSearch/useSearch';
-import LazyLoad from 'react-lazyload';
 import Blank from 'assets/Blank.svg';
+import Loader from 'components/atoms/Loader/Loader';
 
 const Searchbar = () => {
+  const [loaded, setLoaded] = useState(false);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const { searchMovies } = useSearch();
 
@@ -32,20 +33,22 @@ const Searchbar = () => {
           {isOpen &&
             searchedMovies.map((item, index) => (
               <SearchResultsItem {...getItemProps({ item, index })} highlighted={highlightedIndex === index} key={item.id}>
-                <LazyLoad style={{ height: '100%', width: '100%' }}>
-                  <StyledLink to={`/movie/${item.id}`}>
+                <StyledLink to={`/movie/${item.id}`}>
+                  <ImageWrapper>
+                    {!loaded ? <Loader isSmall /> : null}
                     <img
                       src={item.poster_path ? posterLink + 'w185' + item.poster_path : posterLink + 'w185' + item.profile_path}
                       alt={item.title}
+                      onLoad={() => setLoaded(true)}
                       onError={(e) => {
                         if (e.target.src !== `${Blank}`) {
                           e.target.src = `${Blank}`;
                         }
                       }}
                     />
-                    <StyledTitle highlighted={highlightedIndex === index}>{item.title ? item.title : item.name}</StyledTitle>
-                  </StyledLink>
-                </LazyLoad>
+                  </ImageWrapper>
+                  <StyledTitle highlighted={highlightedIndex === index}>{item.title ? item.title : item.name}</StyledTitle>
+                </StyledLink>
               </SearchResultsItem>
             ))}
         </SearchResults>

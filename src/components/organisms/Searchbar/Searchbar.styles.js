@@ -25,10 +25,9 @@ export const SearchWrapper = styled.div`
     width: 90%;
   }
 
-  ${Input}:active, {
   ${Input}:focus {
     width: 100%;
-  };
+  } ;
 `;
 
 export const SearchResults = styled.ul`
@@ -40,6 +39,7 @@ export const SearchResults = styled.ul`
   border-radius: 15px;
   list-style: none;
   width: 100%;
+  min-height: 5rem;
   position: absolute;
   left: 0;
   top: 30px;
@@ -81,6 +81,14 @@ export const StyledLink = styled(Link)`
     width: 8rem;
     border-radius: 1.2rem;
   }
+`;
+
+export const ImageWrapper = styled.div`
+  width: 8rem;
+  height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledTitle = styled.p`

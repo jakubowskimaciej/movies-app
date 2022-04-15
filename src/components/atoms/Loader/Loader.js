@@ -10,6 +10,7 @@ const Spinner = ({ isSmall }) => (
 );
 
 const Wrapper = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -18,10 +19,14 @@ const Wrapper = styled.div`
 `;
 
 const StyledSpinner = styled.svg`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
   animation: rotate 2s linear infinite;
   margin: -25px 0 0 -25px;
-  width: ${({ isSmall }) => (isSmall ? '75px' : '150px')};
-  height: ${({ isSmall }) => (isSmall ? '75px' : '150px')};
+  width: ${({ isSmall }) => (isSmall ? '45px' : '150px')};
+  height: ${({ isSmall }) => (isSmall ? '45px' : '150px')};
 
   & .path {
     stroke: #5652bf;
