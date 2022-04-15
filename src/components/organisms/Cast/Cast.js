@@ -20,9 +20,12 @@ const Cast = () => {
         const { data } = await tmdb.get(`/movie/${id}/credits`);
         setCast(data.cast);
       } catch (err) {
-        dispatch({ type: TYPES.SET_ERROR, payload: err.response });
+        dispatch({ type: TYPES.SET_ERROR });
       }
     })();
+    return () => {
+      setCast([]);
+    };
   }, [id, dispatch]);
 
   return (
