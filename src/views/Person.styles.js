@@ -30,20 +30,8 @@ export const StyledLazyLoad = styled(LazyLoad)`
   }
 `;
 
-export const ImgLoading = styled.div`
-  width: 100%;
-  max-width: 40rem;
-  max-height: 80rem;
-  flex: 1 1 40%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  transition: all 100ms cubic-bezier(0.645, 0.045, 0.355, 1);
-`;
-
 export const BioWrapper = styled.div`
-  width: 80vw;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -55,14 +43,8 @@ export const BioWrapper = styled.div`
     align-items: center;
     width: 100%;
     margin: 2rem 0;
+    padding: 0 4rem;
   }
-`;
-
-export const StyledName = styled(Title)`
-  font-size: ${({ theme }) => theme.fontSize.xl};
-  font-weight: 300;
-  text-transform: uppercase;
-  margin-bottom: 0;
 `;
 
 export const DetailsWrapper = styled.div`
@@ -71,7 +53,18 @@ export const DetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0 6rem 2rem 4rem;
+  padding: 2rem 6rem 2rem 4rem;
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    padding: 2rem;
+  }
+`;
+
+export const StyledName = styled(Title)`
+  font-size: ${({ theme }) => theme.fontSize.xl};
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: 0;
 `;
 
 export const StyledBirthday = styled.p`
@@ -84,6 +77,7 @@ export const StyledBirthday = styled.p`
 export const StyledBio = styled.p`
   line-height: 2;
   font-size: ${({ theme }) => theme.fontSize.m};
+  margin-bottom: 2rem;
 `;
 
 export const StyledH2 = styled.h2`

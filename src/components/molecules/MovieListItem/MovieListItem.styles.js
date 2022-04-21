@@ -56,7 +56,7 @@ export const Image = styled(StyledImage)`
   }
 
   @media ${({ theme }) => theme.mediaQueries.medium} {
-    height: 30rem;
+    height: 28rem;
   }
 `;
 

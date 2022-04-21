@@ -11,6 +11,6 @@ export const Wrapper = styled.div`
   grid-column: 2/2;
 
   @media ${({ theme }) => theme.mediaQueries.medium} {
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 20rem));
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 18rem));
   }
 `;

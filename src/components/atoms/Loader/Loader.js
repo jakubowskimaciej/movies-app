@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ReactComponent as Spinner } from 'assets/loader.svg';
 
-const Spinner = ({ isSmall }) => (
+const Loader = ({ isSmall }) => (
   <Wrapper>
-    <StyledSpinner isSmall={isSmall} viewBox="0 0 50 50">
-      <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="2" />
-    </StyledSpinner>
+    <StyledLoader>
+      <Spinner />
+    </StyledLoader>
   </Wrapper>
 );
 
@@ -18,41 +19,20 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const StyledSpinner = styled.svg`
-  position: absolute;
-  top: 50%;
-  left: 50%;
+const StyledLoader = styled.div`
+  margin: 0 0 2em;
+  height: 100px;
+  width: 20%;
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto 1em;
+  display: inline-block;
+  vertical-align: top;
 
-  animation: rotate 2s linear infinite;
-  margin: -25px 0 0 -25px;
-  width: ${({ isSmall }) => (isSmall ? '45px' : '150px')};
-  height: ${({ isSmall }) => (isSmall ? '45px' : '150px')};
-
-  & .path {
-    stroke: #5652bf;
-    stroke-linecap: round;
-    animation: dash 1.2s ease-in-out infinite;
-  }
-
-  @keyframes rotate {
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes dash {
-    0% {
-      stroke-dasharray: 1, 150;
-      stroke-dashoffset: 0;
-    }
-    50% {
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: -35;
-    }
-    100% {
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: -124;
-    }
+  svg path,
+  svg rect {
+    fill: #00bfa6;
   }
 `;
 
-export default Spinner;
+export default Loader;

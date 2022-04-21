@@ -13,7 +13,6 @@ import {
   MovieTagLine,
   ImageWrapper,
   ActiveButton,
-  RatingWrapper,
 } from './MovieDetails.styles';
 import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitle';
 import Rating from 'components/molecules/Rating/Rating';
@@ -28,7 +27,7 @@ import { posterLink } from './Root';
 import { animateScroll as scroll } from 'react-scroll';
 import Blank from 'assets/Blank.svg';
 import Loader from 'components/atoms/Loader/Loader';
-import { ImgLoading } from './Person.styles';
+import { ImgLoading } from 'components/atoms/ImgLoading/ImgLoading';
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -43,7 +42,7 @@ const MovieDetails = () => {
   useEffect(() => {
     scroll.scrollToTop({
       smooth: true,
-      delay: 500,
+      duration: 1000,
     });
     dispatch(fetchMovieDetails(id));
     dispatch(fetchMovieVideos(id));
@@ -60,12 +59,6 @@ const MovieDetails = () => {
       .filter((el) => el !== null)
       .map((el) => (typeof el === 'number' ? `${el} min.` : el))
       .map((el, i, array) => (i !== array.length - 1 ? `${el} / ` : el));
-  };
-
-  const splitDate = (date) => {
-    if (!date) return;
-    const [year] = date.split('-');
-    return year;
   };
 
   const renderGenres = (genre) => {
@@ -111,7 +104,7 @@ const MovieDetails = () => {
 
   let storedMovie = inWatchlist.find((item) => item.id === movieDetails.id);
   const watchlistDisabled = storedMovie ? true : false;
-
+  console.log(movieDetails);
   return (
     <>
       {loading ? (
@@ -149,11 +142,9 @@ const MovieDetails = () => {
             <MovieTitle>{movieDetails.title}</MovieTitle>
             <MovieTagLine>{movieDetails.tagline}</MovieTagLine>
             <DetailWrapper>
-              <RatingWrapper>
-                <Rating value={movieDetails.vote_average / 2} />
-                <p>{movieDetails.vote_average} / 10</p>
-              </RatingWrapper>
-              <p>{renderInfo(movieDetails.spoken_languages, movieDetails.runtime, splitDate(movieDetails.release_date))}</p>
+              <Rating value={movieDetails.vote_average / 2} />
+              <p>{movieDetails.vote_average} / 10</p>
+              <p>{renderInfo(movieDetails.spoken_languages, movieDetails.runtime, movieDetails.release_date)}</p>
             </DetailWrapper>
             <InfoWrapper>
               <StyledInfoTitle as="h2">the genres:</StyledInfoTitle>

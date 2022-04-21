@@ -31,7 +31,7 @@ const Cast = () => {
   return (
     <CastWrapper>
       {!cast.length ? (
-        <Loader isSmall />
+        <Loader />
       ) : (
         cast.map((person) => (
           <ActorWrapper key={person.id} to={`/person/${person.id}`}>

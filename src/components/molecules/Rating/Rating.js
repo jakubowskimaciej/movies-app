@@ -12,6 +12,10 @@ const RatingWrapper = styled(Stars)`
   line-height: 1;
   margin-top: 1rem;
   font-size: ${({ theme }) => theme.fontSize.m};
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    font-size: ${({ theme }) => theme.fontSize.s};
+  }
 `;
 
 const FontAwesome = styled(FontAwesomeIcon)`

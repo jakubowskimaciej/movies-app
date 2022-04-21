@@ -43,7 +43,7 @@ export const fetchMovies = (name, page) => async (dispatch) => {
     dispatch({ type: TYPES.REMOVE_LOADING });
   } catch (err) {
     dispatch({ type: TYPES.SET_ERROR });
-    history.push('/404');
+    // history.push('/404');
   }
 };
 

@@ -14,7 +14,8 @@ import { StyledInfoTitle } from 'components/atoms/StyledInfoTitle/StyledInfoTitl
 import { Button } from 'components/atoms/Button/Button';
 import PersonError from 'assets/PersonError.svg';
 
-import { BioWrapper, StyledName, DetailsWrapper, StyledBirthday, StyledBio, StyledH2, Wrapper, StyledLazyLoad, ImgLoading } from './Person.styles';
+import { BioWrapper, StyledName, DetailsWrapper, StyledBirthday, StyledBio, StyledH2, Wrapper } from './Person.styles';
+import { ImgLoading } from 'components/atoms/ImgLoading/ImgLoading';
 import MoviesList from 'components/molecules/MoviesList/MoviesList';
 import { LinkWrapper } from 'components/atoms/LinkWrapper/LinkWrapper';
 import { posterLink } from './Root';
@@ -25,6 +26,7 @@ const Person = () => {
   const { id } = useParams();
   const [info, setInfo] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [readMore, setReadMore] = useState(true);
   const { personMovies } = useSelector((state) => state.person);
   const { loading } = useSelector((state) => state.main);
   const dispatch = useDispatch();
@@ -74,6 +76,16 @@ const Person = () => {
     );
   };
 
+  const readMoreHandler = () => {
+    setReadMore((prevState) => !prevState);
+    if (!readMore)
+      return scroller.scrollTo('scroll-after-read-more', {
+        duration: 1000,
+        smooth: 'easeInOutQuart',
+        offset: -150,
+      });
+  };
+
   return (
     <>
       {loading ? (
@@ -81,29 +93,36 @@ const Person = () => {
       ) : (
         <Wrapper>
           <BioWrapper>
-            <StyledLazyLoad height={100}>
-              {!loaded ? (
-                <ImgLoading>
-                  <Loader />
-                </ImgLoading>
-              ) : null}
-              <StyledImage
-                src={posterLink + 'w780' + info.profile_path}
-                alt={info.name}
-                onLoad={() => setLoaded(true)}
-                onError={(e) => {
-                  if (e.target.src !== `${PersonError}`) {
-                    e.target.src = `${PersonError}`;
-                  }
-                }}
-                style={!loaded ? { display: 'none' } : {}}
-              />
-            </StyledLazyLoad>
+            {!loaded ? (
+              <ImgLoading>
+                <Loader />
+              </ImgLoading>
+            ) : null}
+            <StyledImage
+              src={posterLink + 'w780' + info.profile_path}
+              alt={info.name}
+              onLoad={() => setLoaded(true)}
+              onError={(e) => {
+                if (e.target.src !== `${PersonError}`) {
+                  e.target.src = `${PersonError}`;
+                }
+              }}
+              style={!loaded ? { display: 'none' } : {}}
+            />
             <DetailsWrapper>
               <StyledName as="h2">{info.name}</StyledName>
               <StyledBirthday>{info.birthday}</StyledBirthday>
               <StyledInfoTitle as="h3">The Biography</StyledInfoTitle>
-              <StyledBio>{info.biography}</StyledBio>
+              <Element name="scroll-after-read-more">
+                {info.biography ? (
+                  <>
+                    <StyledBio>{readMore ? info.biography.slice(0, 250) + `...` : info.biography}</StyledBio>
+                    <Button isSecondary onClick={readMoreHandler}>
+                      {readMore ? 'Read more' : 'Collapse'}
+                    </Button>
+                  </>
+                ) : null}
+              </Element>
               <LinkWrapper>
                 {renderWebsite(info.homepage)}
                 {renderImdb(info.imdb_id)}

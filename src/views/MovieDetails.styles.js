@@ -72,7 +72,7 @@ export const MovieTagLine = styled.p`
 export const DetailWrapper = styled.div`
   width: 85%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: baseline;
   margin-bottom: 3rem;
 
@@ -82,16 +82,13 @@ export const DetailWrapper = styled.div`
     color: var(--color-lightGrey);
     text-transform: uppercase;
   }
-`;
 
-export const RatingWrapper = styled.div`
-  width: 50%;
-  display: flex;
-  align-items: inherit;
-  justify-content: flex-start;
-  p {
-    font-size: ${({ theme }) => theme.fontSize.l};
-    margin-left: 5rem;
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    width: 100%;
+
+    p {
+      font-size: ${({ theme }) => theme.fontSize.m};
+    }
   }
 `;
 
@@ -99,7 +96,6 @@ export const InfoWrapper = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   margin: 0 0 3rem 1rem;
 
   p {
@@ -119,6 +115,7 @@ export const GenreWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 `;
 
 export const StyledGenreLink = styled(GenreButton)`
