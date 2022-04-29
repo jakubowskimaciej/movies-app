@@ -38,6 +38,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:e2e": "cypress open --project ./src/e2e",
     "eject": "react-scripts eject"
   },
   "lint-staged": {
@@ -63,8 +64,13 @@
     ]
   },
   "devDependencies": {
+    "@cypress/react": "^5.12.4",
+    "@cypress/webpack-dev-server": "^1.8.4",
+    "@testing-library/cypress": "^8.0.2",
     "axios-mock-adapter": "^1.20.0",
+    "cypress": "^9.6.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
@@ -80,6 +86,9 @@
           "import/no-anonymous-default-export": "off"
         }
       }
+    ],
+    "extends": [
+      "plugin:cypress/recommended"
     ]
   }
 }

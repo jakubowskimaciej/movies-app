@@ -104,7 +104,6 @@ const MovieDetails = () => {
 
   let storedMovie = inWatchlist.find((item) => item.id === movieDetails.id);
   const watchlistDisabled = storedMovie ? true : false;
-  console.log(movieDetails);
   return (
     <>
       {loading ? (
