@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Spinner } from 'assets/loader.svg';
 
-const Loader = ({ isSmall }) => (
+const Loader = () => (
   <Wrapper>
-    <StyledLoader>
+    <StyledLoader aria-label="loader">
       <Spinner />
     </StyledLoader>
   </Wrapper>
